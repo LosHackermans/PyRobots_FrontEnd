@@ -11,6 +11,8 @@ function Login() {
     password: ''
   })
 
+  const [error, setErrors] = useState('')
+
   const handleInputChange = (event) => {
     setUser({
       ...user,
@@ -29,8 +31,13 @@ function Login() {
             setToken(response.data.token)
             navigate("/");
           }
+          else if (response.data.error) {
+            setErrors(response.data.error);
+          }
         })
-        .catch(function (error) { console.log(error, 'error'); });
+        .catch(function (error) {
+          setErrors(error.message);
+        });
     }
 
   }
@@ -44,6 +51,7 @@ function Login() {
           <label>Input Password: </label>
           <input type='password' name="password" onChange={handleInputChange} />
           <button type='button' onClick={login}>Login</button>
+          {error && <div>{error}</div>}
         </form>
       )
       }
