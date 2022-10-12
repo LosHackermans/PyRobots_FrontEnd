@@ -20,8 +20,11 @@ function Login() {
     })
   }
 
-  const login = () => {
-    if (user.email === '' && user.password === '') { return } else {
+  const login = (event) => {
+    event.preventDefault();
+    if (user.email === '' || user.password === '') {
+      setErrors("empty field");
+    } else {
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         email: user.email,
         password: user.password
@@ -45,12 +48,12 @@ function Login() {
     <>
       <h2>Login</h2>
       {fetchToken() ? (<p>You are logged in!</p>) : (
-        <form>
-          <label>Input Username: </label>
+        <form onSubmit={login}>
+          <label>Email: </label>
           <input type='email' name="email" onChange={handleInputChange} />
-          <label>Input Password: </label>
+          <label>Password: </label>
           <input type='password' name="password" onChange={handleInputChange} />
-          <button type='button' onClick={login}>Login</button>
+          <button type='submit'>Login</button>
           {error && <div>{error}</div>}
         </form>
       )

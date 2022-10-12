@@ -45,7 +45,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create_user" element={<RequireToken><Create_user /></RequireToken>} />
+          <Route path="/create_user" element={<Create_user />} />
           <Route path="/login" element={<Login />} />
           <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><Create_match /></RequireToken>} />
