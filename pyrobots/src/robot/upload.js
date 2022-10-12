@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 
@@ -25,33 +26,37 @@ function Upload() {
 
   return <div>
     <h2>Upload robot</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Name: </label>
-          <input type="text" {...register("name", {
-            required: {value: true, message:"A name is required"}
+      <form className="col-lg-6 offset-lg-3 " onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group mb-3" >
+          <label className="form-label"  >Name: </label>
+          <span className="text-danger" > {errors?.name?.message} </span>
+          <input className="form-control" id="robot_name" type="text" {...register("name", {
+            required: {value: true, message:"a name is required"}
           })}/>
-          <span> {errors?.name?.message} </span>
+          <p className="form-text" >Pick a name for your robot</p>
         </div>
-        <div>
-          <label>Avatar: </label>
+        <div className="form-group" >
+          <label className="form-label">Avatar: </label>
           <input 
-            type="file" 
+            type="file"
+            className="form-control" 
             accept="image/png, image/jpeg" 
             {...register('avatar', {
             required:false
           })} />
+          <p className="form-text" >You can give your robot some personality</p>
         </div>
-        <div>
-          <label>Robot code: </label>
-          <input type="file" accept=".py" {...register('code', {
-            required: {value: true, message:"A code is required"}
+        <div className="form-group">
+          <label className="form-label" >Robot code: </label>
+          <span className="text-danger" > {errors?.code?.message} </span>
+          <input className="form-control" type="file" accept=".py" {...register('code', {
+            required: {value: true, message:"the code is required"}
           })} />
-          <span> {errors?.code?.message} </span>
+          <p className="form-text" >The code will be the consciousness of your robot</p>
         </div>
-        
-        
-        <input type={"submit"} value="Upload" />
+        <div className="col text-center">
+          <Button type={"submit"} >Upload</Button>
+        </div>
       </form>
       {error && <span>{error}</span>}
     </div>
