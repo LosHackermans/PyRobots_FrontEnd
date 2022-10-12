@@ -4,7 +4,7 @@ import Create_match from './create_match/create_match';
 import Home from './home/home';
 import Login from './login/login';
 import List_matches from './list_matches/list_matches';
-import Create_robot from './create_robot/create_robot';
+import Upload from './robot/upload';
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,7 +35,7 @@ function App() {
               <Link to="/create_match">Create match</Link>
             </li>
             <li>
-              <Link to="/create_robot">Create robot</Link>
+              <Link to="/upload_robot">Upload robot</Link>
             </li>
           </ul>
         </nav>
@@ -48,7 +48,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/list_matches" element={<List_matches/>}/>
           <Route path="/create_match" element={<Create_match/>}/>
-          <Route path="/create_robot" element={<Create_robot/>}/>
+          <Route path="/upload_robot" element={<Upload/>}/>
         </Routes>
       </div>
     </Router>
