@@ -26,6 +26,12 @@ function Create_user() {
       data: JSON.stringify(user)
     };
 
+      if(user.password.length <= 8){
+        setError("Ingresa una contraseña con al menos 8 caracteres");
+      }else{
+        setError('')
+      }
+
     axios.request(`/create_user`, options)
     .then(response => {
       if(response.status === 201){
