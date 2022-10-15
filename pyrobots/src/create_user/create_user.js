@@ -38,9 +38,10 @@ function Create_user() {
         setMessage('user created successfully')
       }
     })
-    .catch(error => 
-      setError("Error: " + error.message)  
-    )
+    .catch(error => {
+      console.log(error);
+      setError("an error has occurred");  
+    })
   }
 
   return (
