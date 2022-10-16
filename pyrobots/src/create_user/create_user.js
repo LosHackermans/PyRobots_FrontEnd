@@ -32,7 +32,7 @@ function Create_user() {
         setError('')
       }
 
-    axios.request(`/create_user`, options)
+    axios.request(`${process.env.REACT_APP_BACKEND_URL}/create_user`, options)
     .then(response => {
       if(response.status === 201){
         setMessage('user created successfully')
