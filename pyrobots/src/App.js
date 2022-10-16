@@ -1,7 +1,7 @@
 import './App.css';
 import { RequireToken } from './common/Auth'
 import Create_user from "./create_user/create_user";
-import CreateMatch from './match/createMarch';
+import CreateMatch from './match/CreateMatch';
 import Home from './home/home';
 import Login from './login/Login';
 import List_matches from './list_matches/list_matches';
