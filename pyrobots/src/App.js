@@ -49,7 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
-          <Route path="/create_robot" element={<RequireToken><Upload /></RequireToken>} />
+          <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
         </Routes>
       </div>
     </Router>
