@@ -31,7 +31,7 @@ function Login() {
       })
         .then(function (response) {
           if (response.data.token) {
-            setToken(response.data.token)
+            setToken(response.data.token);
             navigate("/");
           }
           else if (response.data.error) {

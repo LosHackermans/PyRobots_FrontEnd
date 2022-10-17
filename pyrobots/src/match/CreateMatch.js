@@ -69,17 +69,17 @@ function CreateMatch() {
       <h2>Create Match</h2>
       <form onSubmit={onSubmit}>
         <label>Name: </label>
-        <input type='text' name="name" onChange={handleInputChange} />
+        <input data-testid="name-input" type='text' name="name" onChange={handleInputChange} />
         <p>Number of players to begin match</p>
         <label>Min: </label>
-        <input type='number' name="min_players" placeholder="2" onChange={handleInputChange} />
+        <input data-testid="min_players-input" type='number' name="min_players" placeholder="2" onChange={handleInputChange} />
         <label>Max: </label>
-        <input type='number' name="max_players" placeholder="4" onChange={handleInputChange} />
+        <input data-testid="max_players-input" type='number' name="max_players" placeholder="4" onChange={handleInputChange} />
         <label>Number of Rounds: </label>
-        <input type='number' name="number_rounds" placeholder="50" onChange={handleInputChange} />
+        <input data-testid="number_rounds-input" type='number' name="number_rounds" placeholder="50" onChange={handleInputChange} />
         <label>Number of Games: </label>
-        <input type='number' name="number_games" placeholder="10" onChange={handleInputChange} />
-        <select key="robots" name="id_robot" onChange={handleInputChange}>
+        <input data-testid="number_games-input" type='number' name="number_games" placeholder="10" onChange={handleInputChange} />
+        <select data-testid="robot-select" key="robots" name="id_robot" onChange={handleInputChange}>
           <option value="">-select your robot-</option>
           {
             robots.map((element, index) => <option key={element.id} value={element.id}>{element.name}</option>)

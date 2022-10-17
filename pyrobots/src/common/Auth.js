@@ -6,9 +6,9 @@ import axios from "axios"
 
 export const setToken = (token) => {
     // set token in localStorage
-    localStorage.setItem('userToken', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+    localStorage.setItem('userToken', token);
 }
 
 export const fetchToken = (token) => {    // fetch the token
