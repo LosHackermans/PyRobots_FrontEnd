@@ -27,7 +27,7 @@ function Create_user() {
     };
 
       if(user.password.length <= 8){
-        setError("Ingresa una contraseña con al menos 8 caracteres");
+        setError("Enter a password with at least 8 characters");
       }else{
         setError('')
       }
