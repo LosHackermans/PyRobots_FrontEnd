@@ -1,8 +1,9 @@
 import './App.css';
+import { RequireToken } from './common/Auth'
 import Create_user from "./create_user/create_user";
-import Create_match from './create_match/create_match';
+import CreateMatch from './match/CreateMatch';
 import Home from './home/home';
-import Login from './login/login';
+import Login from './login/Login';
 import List_matches from './list_matches/list_matches';
 import Upload from './robot/upload';
 import {
@@ -43,12 +44,12 @@ function App() {
         {/* A <Routes> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/create_user" element={<Create_user/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/list_matches" element={<List_matches/>}/>
-          <Route path="/create_match" element={<Create_match/>}/>
-          <Route path="/upload_robot" element={<Upload/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/create_user" element={<Create_user />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
+          <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
+          <Route path="/create_robot" element={<RequireToken><Upload /></RequireToken>} />
         </Routes>
       </div>
     </Router>
