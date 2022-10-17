@@ -70,21 +70,30 @@ function CreateMatch() {
       <form onSubmit={onSubmit}>
         <label>Name: </label>
         <input data-testid="name-input" type='text' name="name" onChange={handleInputChange} />
+        <br />
         <p>Number of players to begin match</p>
         <label>Min: </label>
         <input data-testid="min_players-input" type='number' name="min_players" placeholder="2" onChange={handleInputChange} />
         <label>Max: </label>
         <input data-testid="max_players-input" type='number' name="max_players" placeholder="4" onChange={handleInputChange} />
+        <br />
+        <br />
         <label>Number of Rounds: </label>
         <input data-testid="number_rounds-input" type='number' name="number_rounds" placeholder="50" onChange={handleInputChange} />
+        <br />
+        <br />
         <label>Number of Games: </label>
         <input data-testid="number_games-input" type='number' name="number_games" placeholder="10" onChange={handleInputChange} />
+        <br />
+        <br />
         <select data-testid="robot-select" key="robots" name="id_robot" onChange={handleInputChange}>
           <option value="">-select your robot-</option>
           {
             robots.map((element, index) => <option key={element.id} value={element.id}>{element.name}</option>)
           }
         </select>
+        <br />
+        <br />
         <button type='submit'>Create Match</button>
         {error && <div>{error}</div>}
       </form>
