@@ -1,7 +1,7 @@
 import './App.css';
 import { RequireToken } from './common/Auth'
 import Create_user from "./create_user/create_user";
-import Create_match from './create_match/create_match';
+import CreateMatch from './match/CreateMatch';
 import Home from './home/home';
 import Login from './login/Login';
 import List_matches from './list_matches/list_matches';
@@ -48,7 +48,7 @@ function App() {
           <Route path="/create_user" element={<Create_user />} />
           <Route path="/login" element={<Login />} />
           <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
-          <Route path="/create_match" element={<RequireToken><Create_match /></RequireToken>} />
+          <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/create_robot" element={<RequireToken><Create_robot /></RequireToken>} />
         </Routes>
       </div>
