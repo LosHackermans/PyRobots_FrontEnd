@@ -23,7 +23,7 @@ function CreateMatch() {
     max_players: 4,
     number_rounds: 50,
     number_games: 10,
-    id_robot: ''
+    id_robot: '1'
   })
 
   const [error, setErrors] = useState('')
@@ -44,9 +44,10 @@ function CreateMatch() {
         name: match.name,
         min_players: parseInt(match.min_players),
         max_players: parseInt(match.max_players),
-        number_rounds: parseInt(match.number_rounds),
-        number_games: parseInt(match.number_games),
+        number_of_rounds: parseInt(match.number_rounds),
+        number_of_games: parseInt(match.number_games),
         id_robot: parseInt(match.id_robot),
+        password: "",
       })
         .then(function (response) {
           if (response.data.id_match) {

@@ -12,14 +12,12 @@ function Upload() {
   const onSubmit = async (data, event) => {
     event.preventDefault();
 
-    const formdata = new FormData();
-    formdata.append("name", data.name);
-    formdata.append("avatar", data.avatar[0]);
-    formdata.append("code", data.code[0]);
-
-    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload_robot`, formdata)
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload_robot`, {
+      name: data.name,
+      script: "script del robot"
+    })
       .then((response) => {
-        if(response === 201) {
+        if(response === 200) {
           alert("Your bot has been uploaded correctly!");
           Navigate("/");
         };
