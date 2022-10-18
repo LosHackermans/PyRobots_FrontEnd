@@ -11,20 +11,15 @@ function Create_user() {
 
   const [message, setMessage] = useState('')
   const [error, setError] = useState('');
-  
+
   const handleChange = (event) => {
     const {name, value} = event.target;
     setUser({...user, [name]: value});
   }
-  
+
   const handleSubmit = (event) => { 
     event.preventDefault();
-    
-    let options = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      data: JSON.stringify(user)
-    };
+
 
       if(user.password.length <= 8){
         setError("Enter a password with at least 8 characters");
@@ -32,13 +27,15 @@ function Create_user() {
         setError('')
       }
 
-    axios.request(`${process.env.REACT_APP_BACKEND_URL}/create_user`, options)
-    .then(response => {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/create_user`, {
+      email: user.email,
+      username: user.name,
+      password: user.password
+    }).then(response => {
       if(response.status === 201){
         setMessage('user created successfully')
       }
-    })
-    .catch(error => {
+    }).catch(error => {
       console.log(error);
       setError("an error has occurred");  
     })
