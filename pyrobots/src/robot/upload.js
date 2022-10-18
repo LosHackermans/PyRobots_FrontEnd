@@ -17,9 +17,8 @@ function Upload() {
       script: "script del robot"
     })
       .then((response) => {
-        if(response === 200) {
+        if(response.detail = "Robot created") {
           alert("Your bot has been uploaded correctly!");
-          Navigate("/");
         };
       }).catch((error) => {
         setError(error.message);

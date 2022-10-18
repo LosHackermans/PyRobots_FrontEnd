@@ -3,6 +3,8 @@ import { setToken, fetchToken } from '../common/Auth'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+// to logout: localStorage.removeItem("userToken");
+
 function Login() {
   const navigate = useNavigate();
 
