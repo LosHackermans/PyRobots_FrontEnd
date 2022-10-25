@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import { fireEvent, render, screen } from "@testing-library/react";
 import Create_user from "./create_user";
+import mockAxios from "axios"
 
 describe("Tests of create_users", () => {
     test("form fields exist", () => {
@@ -34,7 +35,7 @@ describe("Tests of create_users", () => {
         const button = screen.getByRole('button', {name: /Register/i});
         fireEvent.click(button);
 
-        const response = await screen.findByText('user created successfully');
+        const response = await screen.findByText('User created successfully');
 
         expect(response).toBeInTheDocument();
     });
@@ -43,13 +44,13 @@ describe("Tests of create_users", () => {
         render(<Create_user/>);
 
         const inputName = screen.getByPlaceholderText(/enter your name/i);
-        await fireEvent.change(inputName, { target: { value: 'Jhon' }});
+        await fireEvent.change(inputName, { target: { value: 'Fede' }});
 
         const inputEmail = screen.getByPlaceholderText(/enter your email/i);
-        await fireEvent.change(inputEmail, { target: { value: 'Jhon@gmail.com' }});
+        await fireEvent.change(inputEmail, { target: { value: 'fede@gmail.com' }});
 
         const inputPassword = screen.getByPlaceholderText(/enter your password/i);
-        await fireEvent.change(inputPassword, { target: { value: 'abcd-1234' }});
+        await fireEvent.change(inputPassword, { target: { value: 'abcd-12345' }});
     
         const button = screen.getByRole('button', {name: /Register/i});
         fireEvent.click(button);

@@ -32,12 +32,16 @@ function Create_user() {
       username: user.name,
       password: user.password
     }).then(response => {
-      if(response.status === 201){
-        setMessage('user created successfully')
+      if(response.status === 200){
+        setMessage(response.data.message)
       }
     }).catch(error => {
-      console.log(error);
-      setError("an error has occurred");  
+      if(error.response.data.detail){
+        setError(error.response.data.detail);  
+      } else {
+        setError('Server error');
+      }
+      
     })
   }
 
