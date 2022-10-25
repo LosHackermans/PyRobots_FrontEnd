@@ -17,41 +17,28 @@ import {
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/create_user">Create user</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/list_matches">List matches</Link>
-            </li>
-            <li>
-              <Link to="/create_match">Create match</Link>
-            </li>
-            <li>
-              <Link to="/upload_robot">Upload robot</Link>
-            </li>
-          </ul>
-        </nav>
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">
+            PyRobots
+          </a>
+          <Link className="link" to="/">Home</Link>
+          <Link className="link" to="/create_user">Create user</Link>
+          <Link className="link" to="/login">Login</Link>
+          <Link className="link" to="/list_matches">List matches</Link>
+          <Link className="link" to="/create_match">Create match</Link>
+          <Link className="link" to="/upload_robot">Upload robot</Link>
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create_user" element={<Create_user />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
+        <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
+        <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
+      </Routes>
 
-        {/* A <Routes> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create_user" element={<Create_user />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
-          <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
-          <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
-        </Routes>
-      </div>
     </Router>
   );
 }

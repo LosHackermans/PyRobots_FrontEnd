@@ -1,0 +1,4 @@
+- Cambio Nav
+- Modificacion de index para agregar el Nav
+- Cambio App.css
+- Agregacion de Icono al lado de la ventana
