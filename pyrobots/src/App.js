@@ -1,7 +1,7 @@
 import "./css/App.css";
 import { RequireToken } from './helpers/Auth'
-import CreateUser from "./components/CreateUser";
-import CreateMatch from './components/CreateMatch';
+import { CreateUser } from "./components/CreateUser";
+import { CreateMatch } from './components/CreateMatch';
 import Home from './components/Home';
 import Login from './components/Login';
 import ListMatches from './components/ListMatches';
@@ -29,15 +29,16 @@ function App() {
           <Link className="link" to="/upload_robot">Upload robot</Link>
         </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/create_user" element={<CreateUser />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/list_matches" element={<RequireToken><ListMatches /></RequireToken>} />
-        <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
-        <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
-      </Routes>
-
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create_user" element={<CreateUser />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/list_matches" element={<RequireToken><ListMatches /></RequireToken>} />
+          <Route path="/create_match" element={<CreateMatch />} />
+          <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
+        </Routes>
+      </div>
     </Router>
   );
 }

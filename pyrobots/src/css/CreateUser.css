@@ -1,0 +1,27 @@
+h1{
+    margin-right: 30px;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+.sign-up-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    font-size: 22px;
+    gap:40px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-left: 90px;
+    margin-top: 20px;
+}

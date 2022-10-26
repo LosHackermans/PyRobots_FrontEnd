@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import { fireEvent, render, screen } from "@testing-library/react";
-import CreateUser from "./CreateUser";
+import { CreateUser } from '../components/CreateUser';
 
 describe("Tests of create_users", () => {
     test("form fields exist", () => {

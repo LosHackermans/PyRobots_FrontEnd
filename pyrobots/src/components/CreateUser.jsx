@@ -1,7 +1,9 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { FormType } from "./FormType";
+import "../css/CreateUser.css";
 
-function CreateUser() {
+export const CreateUser = () => {
 
   const [user, setUser] = useState({
     name: "",
@@ -45,27 +47,19 @@ function CreateUser() {
   }
 
   return (
-    <>
-      <h2>Sign Up</h2>
+    <div className="sign-up-container animate__animated animate__zoomInDown">
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <label>Name: </label>
-        <input type="text" name="name" placeholder="enter your name" onChange={handleChange} required />
-        <br />
-        <br />
-        <label>Email: </label>
-        <input type="text" name="email" placeholder="enter your email" onChange={handleChange} required />
-        <br />
-        <br />
-        <label>Password: </label>
-        <input type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
-        <br />
-        <br />
-        <button type="submit">Register</button>
-        {message ? <p>{message}</p> : null }
+        <FormType text="Name" type="name" id="exampleInputname" ph="Enter Name" handleChange={handleChange}></FormType>
+        <FormType text="Email address" type="email" id="exampleInputEmail1" ph="Enter email" handleChange={handleChange}></FormType>
+        <FormType text="Password" type="password" id="exampleInputPassword1" ph="Password" handleChange={handleChange}></FormType>
+        <button type="submit" className="btn btn-dark">
+          Register
+        </button>
+        {message ? <p>{message}</p> : null}
         <p>{error}</p>
       </form>
-    </>
+    </div>
   );
 }
 
-export default CreateUser;
