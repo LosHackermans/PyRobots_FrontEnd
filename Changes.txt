@@ -2,3 +2,5 @@
 - Modificacion de index para agregar el Nav
 - Cambio App.css
 - Agregacion de Icono al lado de la ventana
+- Solucion de errores de PascalCase
+- Correcion de imports al mover los files de lugar

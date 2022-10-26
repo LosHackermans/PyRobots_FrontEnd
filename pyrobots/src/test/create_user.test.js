@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
 import { fireEvent, render, screen } from "@testing-library/react";
-import Create_user from "./create_user";
+import CreateUser from "./CreateUser";
 
 describe("Tests of create_users", () => {
     test("form fields exist", () => {
         
-        render(<Create_user/>);
+        render(<CreateUser/>);
 
         const inputName = screen.getByPlaceholderText("enter your name");
         const inputEmail = screen.getByPlaceholderText("enter your email");
@@ -20,7 +20,7 @@ describe("Tests of create_users", () => {
     });
 
     test("successful sending of user registration form data", async () => {
-        render(<Create_user/>);
+        render(<CreateUser/>);
 
         const inputName = screen.getByPlaceholderText(/enter your name/i);
         await fireEvent.change(inputName, { target: { value: 'Jhon' }});
@@ -40,7 +40,7 @@ describe("Tests of create_users", () => {
     });
     
     test("error in sending data from the user registration form", async () => {
-        render(<Create_user/>);
+        render(<CreateUser/>);
 
         const inputName = screen.getByPlaceholderText(/enter your name/i);
         await fireEvent.change(inputName, { target: { value: 'Jhon' }});

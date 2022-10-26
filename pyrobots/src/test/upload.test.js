@@ -1,5 +1,5 @@
 import React from "react";
-import Upload from "./upload";
+import Upload from '../components/Upload'
 import { fireEvent, render, screen } from "@testing-library/react";
 
 describe("UploadForm", () => {

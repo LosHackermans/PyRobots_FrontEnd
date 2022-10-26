@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Create_user() {
+function CreateUser() {
 
   const [user, setUser] = useState({
     name: "",
@@ -68,4 +68,4 @@ function Create_user() {
   );
 }
 
-export default Create_user;
+export default CreateUser;

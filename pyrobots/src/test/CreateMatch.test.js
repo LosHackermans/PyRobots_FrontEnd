@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import CreateMatch from './CreateMatch.js';
+import CreateMatch from './components/CreateMatch';
 
 const mockedUsedNavigate = jest.fn();
 
