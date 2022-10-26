@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Login from '../components/Login';
+import { Login } from '../components/Login';
 
 const mockedUsedNavigate = jest.fn();
 

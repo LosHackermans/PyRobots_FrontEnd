@@ -1,9 +1,9 @@
 h2{
-    padding: 20px;
+    padding: 60px;
     text-align: center;
 }
 
-.create-match-container{
+.upload-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,13 +12,10 @@ h2{
     font-size: 20px;
 }
 
-.btn{
-    padding: 10px;
-    margin: 0 auto;
+.form-group{
+    margin-bottom: 20px;
 }
 
-.btn-container{
-    display: flex;
-    padding-top: 10px;
-    gap: 10px;
+.btn{
+    margin: 10px auto ;
 }

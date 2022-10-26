@@ -2,10 +2,10 @@ import "./css/App.css";
 import { RequireToken } from './helpers/Auth'
 import { CreateUser } from "./components/CreateUser";
 import { CreateMatch } from './components/CreateMatch';
-import Home from './components/Home';
-import Login from './components/Login';
-import ListMatches from './components/ListMatches';
-import Upload from './components/Upload';
+import { Home } from './components/Home';
+import { Login } from './components/Login';
+import { ListMatches } from './components/ListMatches';
+import { Upload } from './components/Upload';
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,7 +35,7 @@ function App() {
           <Route path="/create_user" element={<CreateUser />} />
           <Route path="/login" element={<Login />} />
           <Route path="/list_matches" element={<RequireToken><ListMatches /></RequireToken>} />
-          <Route path="/create_match" element={<CreateMatch />} />
+          <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
         </Routes>
       </div>

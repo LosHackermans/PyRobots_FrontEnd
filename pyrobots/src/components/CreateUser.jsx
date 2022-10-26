@@ -53,9 +53,11 @@ export const CreateUser = () => {
         <FormType text="Name" type="name" id="exampleInputname" ph="Enter Name" handleChange={handleChange}></FormType>
         <FormType text="Email address" type="email" id="exampleInputEmail1" ph="Enter email" handleChange={handleChange}></FormType>
         <FormType text="Password" type="password" id="exampleInputPassword1" ph="Password" handleChange={handleChange}></FormType>
+        <div className="container-button">
         <button type="submit" className="btn btn-dark">
           Register
         </button>
+        </div>
         {message ? <p>{message}</p> : null}
         <p>{error}</p>
       </form>
