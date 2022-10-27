@@ -19,13 +19,7 @@ function Create_user() {
 
   const handleSubmit = (event) => { 
     event.preventDefault();
-
-
-      if(user.password.length <= 8){
-        setError("Enter a password with at least 8 characters");
-      }else{
-        setError('')
-      }
+    setMessage('');
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/create_user`, {
       email: user.email,
