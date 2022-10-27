@@ -1,64 +1,82 @@
 import axios from "axios";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
 
 function Upload() {
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const [robot, setRobot] = useState({
+    name: '',
+    avatar: '',
+    script: ''
+  });
   const [error, setError] = useState("");
 
-  const onSubmit = async (data, event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload_robot`, {
-      name: data.name,
-      script: "script del robot"
-    })
+    
+    if (robot.name === '') {
+      setError("A name is required");
+      return
+    } else if (robot.script === '') {
+      setError("A script is required");
+      return
+    }
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload_robot`, robot)
       .then((response) => {
-        if(response.detail = "Robot created") {
-          alert("Your bot has been uploaded correctly!");
+        if(response.status === 200) {
+          alert(response.data.detail);
         };
       }).catch((error) => {
         setError(error.message);
       })
     }
 
+    const handleFileChange = e => {
+      console.log("eh entré")
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = () => {
+        setRobot({...robot, [e.target.name]: reader.result})
+      }
+      reader.onerror = () => {
+        console.log("file error", reader.error)
+      }
+    }
+
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setRobot({...robot, [e.target.name]: reader.result})
+      }
+    }
+
+    const handleInputChange = (event) => {
+      setRobot({
+        ...robot,
+        [event.target.name]: event.target.value
+      })
+    }
+
   return <div>
     <h2>Upload robot</h2>
-      <form className="col-lg-4 offset-lg-1 " onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group mb-3" >
-          <label className="form-label"  >Name: </label>
-          <span className="text-danger" > {errors?.name?.message} </span>
-          <input className="form-control" placeholder="robot_name" type="text" {...register("name", {
-            required: {value: true, message:"a name is required"}
-          })} />
-          <p className="form-text" >Pick a name for your robot</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name: </label>
+          <input placeholder="robot_name" onChange={handleInputChange} name="name" type="text" />
         </div>
-        <div className="form-group" >
-          <label className="form-label" >Avatar (optional): </label>
-          <input 
-            type="file"
-            className="form-control" 
-            accept="image/png, image/jpeg" 
-            placeholder="robot_avatar"
-            {...register('avatar', {
-            required:false
-          })} />
-          <p className="form-text" >You can give your robot some personality</p>
+        <div >
+          <label >Avatar (optional): </label>
+          <input type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
         </div>
-        <div className="form-group">
-          <label className="form-label" >Robot code: </label>
-          <span className="text-danger" > {errors?.code?.message} </span>
-          <input className="form-control" type="file" placeholder="robot_file" accept=".py" {...register('code', {
-            required: {value: true, message:"the code is required"}
-          })} />
-          <p className="form-text" >The code will be the consciousness of your robot</p>
+        <div>
+          <label >Robot code: </label>
+          <input type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
         </div>
-        <div className="col text-center">
-          <Button type={"submit"} >Upload</Button>
-          {error && <div><span className="text-danger" >{error}</span></div>}
+        <div>
+        <button type='submit'>Upload</button>
+          {error && <div><span >{error}</span></div>}
         </div>
       </form>
     </div>
