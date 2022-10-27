@@ -23,7 +23,7 @@ function CreateMatch() {
     max_players: 4,
     number_rounds: 50,
     number_games: 10,
-    id_robot: '1'
+    id_robot: ''
   })
 
   const [error, setErrors] = useState('')

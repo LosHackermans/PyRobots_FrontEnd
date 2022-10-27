@@ -36,7 +36,7 @@ function Create_user() {
         setMessage(response.data.message)
       }
     }).catch(error => {
-      if(error.response.data.detail){
+      if(error.response?.data?.detail){
         setError(error.response.data.detail);  
       } else {
         setError('Server error');
