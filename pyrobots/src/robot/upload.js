@@ -43,6 +43,15 @@ function Upload() {
       }
     }
 
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setRobot({...robot, [e.target.name]: reader.result})
+      }
+    }
+
     const handleInputChange = (event) => {
       setRobot({
         ...robot,
@@ -59,7 +68,7 @@ function Upload() {
         </div>
         <div >
           <label >Avatar (optional): </label>
-          <input type="file" accept="image/png, image/jpeg" placeholder="robot_avatar" />
+          <input type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
         </div>
         <div>
           <label >Robot code: </label>

@@ -32,7 +32,7 @@ describe("UploadForm", () => {
     await fireEvent.change(robot_file, {target: {files: [file_example]}});
     fireEvent.click(submit_button);
 
-    const response = await screen.findByText('a name is required');
+    const response = await screen.findByText('A name is required');
     expect(response).toBeInTheDocument();
 
   })
@@ -50,7 +50,7 @@ describe("UploadForm", () => {
     await fireEvent.change(robot_avatar, {target: {files: [avatar_example]}});
     fireEvent.click(submit_button);
 
-    const response = await screen.findByText('the code is required');
+    const response = await screen.findByText('A script is required');
     expect(response).toBeInTheDocument();
 
   })
