@@ -6,6 +6,7 @@ import Home from './home/home';
 import Login from './login/Login';
 import List_matches from './list_matches/list_matches';
 import Upload from './robot/upload';
+import Simulation from "./simulation/Simulation";
 import {
   BrowserRouter as Router,
   Routes,
@@ -38,6 +39,9 @@ function App() {
             <li>
               <Link to="/upload_robot">Upload robot</Link>
             </li>
+            <li>
+              <Link to="/simulation">Simulation</Link>
+            </li>
           </ul>
         </nav>
 
@@ -50,6 +54,7 @@ function App() {
           <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
+          <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
         </Routes>
       </div>
     </Router>
