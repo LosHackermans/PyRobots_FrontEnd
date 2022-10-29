@@ -33,7 +33,7 @@ it('should have all expected fields, along with a sumbit button', () => {
     expect(submitButton).toBeInTheDocument();
 });
 
-test("error in empty name or robot", async () => {
+test("empty name", async () => {
     render(<CreateMatch />);
 
     const nameField = screen.getByTestId('name-input');
@@ -49,11 +49,32 @@ test("error in empty name or robot", async () => {
     await fireEvent.change(maxPlayersField, { target: { value: '4' } });
     await fireEvent.change(numberRoundsField, { target: { value: '10' } });
     await fireEvent.change(numberGamesField, { target: { value: '50' } });
+    await fireEvent.change(idRobotField, { target: { value: '1' } });
+
+    fireEvent.click(submitButton);
+
+    expect(nameField).toBeInvalid();
+});
+
+test("empty robot", async () => {
+    render(<CreateMatch />);
+
+    const nameField = screen.getByTestId('name-input');
+    const minPlayersField = screen.getByTestId('min_players-input');
+    const maxPlayersField = screen.getByTestId('max_players-input');
+    const numberRoundsField = screen.getByTestId('number_rounds-input');
+    const numberGamesField = screen.getByTestId('number_games-input');
+    const idRobotField = screen.getByTestId('robot-select');
+    const submitButton = screen.getByRole('button', { name: /Create Match/i });
+
+    await fireEvent.change(nameField, { target: { value: 'name-input' } });
+    await fireEvent.change(minPlayersField, { target: { value: '2' } });
+    await fireEvent.change(maxPlayersField, { target: { value: '4' } });
+    await fireEvent.change(numberRoundsField, { target: { value: '10' } });
+    await fireEvent.change(numberGamesField, { target: { value: '50' } });
     await fireEvent.change(idRobotField, { target: { value: '' } });
 
     fireEvent.click(submitButton);
 
-    const response = await screen.findByText('empty field');
-
-    expect(response).toBeInTheDocument();
+    expect(idRobotField).toBeInvalid();
 });
