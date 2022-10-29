@@ -7,6 +7,7 @@ function Create_user() {
     name: "",
     email: "",
     password: "",
+    avatar: ""
   });
 
   const [message, setMessage] = useState('')
@@ -17,6 +18,15 @@ function Create_user() {
     setUser({...user, [name]: value});
   }
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setUser({...user, [e.target.name]: reader.result})
+    }
+  }
+
   const handleSubmit = (event) => { 
     event.preventDefault();
     setMessage('');
@@ -24,7 +34,8 @@ function Create_user() {
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/create_user`, {
       email: user.email,
       username: user.name,
-      password: user.password
+      password: user.password,
+      avatar: user.avatar
     }).then(response => {
       if(response.status === 200){
         setMessage(response.data.message)
@@ -53,6 +64,12 @@ function Create_user() {
         <br />
         <label>Password: </label>
         <input type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
+        <br />
+        <br />
+        <div >
+          <label >Avatar (optional): </label>
+          <input type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+        </div>
         <br />
         <br />
         <button type="submit">Register</button>
