@@ -1,9 +1,10 @@
 import './App.css';
-import { RequireToken } from './common/Auth'
+import { RequireToken, setupAxios } from './common/Auth'
 import Create_user from "./create_user/create_user";
 import CreateMatch from './match/CreateMatch';
 import Home from './home/home';
 import Login from './login/Login';
+import Logout from './login/Logout';
 import List_matches from './list_matches/list_matches';
 import Upload from './robot/upload';
 import {
@@ -15,6 +16,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+  setupAxios();
   return (
     <Router>
       <div>
@@ -28,6 +30,9 @@ function App() {
             </li>
             <li>
               <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/logout">Logout</Link>
             </li>
             <li>
               <Link to="/list_matches">List matches</Link>
@@ -47,6 +52,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/create_user" element={<Create_user />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<RequireToken><Logout /></RequireToken>} />
           <Route path="/list_matches" element={<RequireToken><List_matches /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
