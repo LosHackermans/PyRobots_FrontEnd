@@ -9,6 +9,7 @@ function Simulation() {
     const [rounds, setRounds] = useState(0);
     const [robots, setRobots] = useState([]);
     const [checked, setChecked] = useState(new Array(robots.length).fill(false));
+    const [dataRounds, setDataRounds] = useState({});
 
     const handleRounds = (event) => {
         setRounds(event.target.value);
@@ -21,23 +22,6 @@ function Simulation() {
 
         // setRobots((robot) => [...robots, robot]);
     }, []);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let movesAndStatus;
-
-        if (robots !== []) {
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/simulation`, {
-                robots: robots,
-                rounds: rounds,
-            }).then(response => {
-                movesAndStatus = response.data;
-                console.log(response) //!Ver después que hacer con el response
-            })
-        } else {
-
-        }
-    }
 
     const handleChecked = (position) => {
         const updateChaked = checked.map((element, index) =>
@@ -64,6 +48,19 @@ function Simulation() {
         })
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/simulation`, {
+            robots: robots,
+            rounds: rounds,
+        }).then(response => {
+            setDataRounds(response.data);
+            console.log(dataRounds);
+        })
+    }
+
     return (
         <>
             <h2>Simulation</h2>
@@ -81,7 +78,7 @@ function Simulation() {
                     <br />
                     <button onClick={handleSubmit}>Iniciar simulación</button>
                 </form>
-                <GameBoard />
+                <GameBoard data={dataRounds} />
             </div>
         </>
     )

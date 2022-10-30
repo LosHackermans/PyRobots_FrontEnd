@@ -1,11 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import './Simulation.css';
 
-function GameBoard() {
+function GameBoard(props) {
 
     let gameBoardRef = useRef(null);
     let contextRef = useRef(null);
-
     
     useEffect(() => {
         const gameBoard = gameBoardRef.current;
