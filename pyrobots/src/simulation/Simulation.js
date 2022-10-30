@@ -57,26 +57,26 @@ function Simulation() {
             rounds: rounds,
         }).then(response => {
             setDataRounds(response.data);
-            console.log(dataRounds);
         })
-    }
 
+    }
+    
     return (
         <>
             <h2>Simulation</h2>
             <div className='conteiner'>
                 <form>
-                    <label>Cantidad de rondas</label>
+                    <label>Number of rounds</label>
                     <input type='number' onChange={handleRounds} />
                     <br />
                     <br />
-                    <label>Seleccione el o los robots que desea usar en la simulación</label>
+                    <label>Select up to four robots</label>
                     <br />
                     {robots.map((robot) => (
                         <Robots key={robot.id} name={robot.name} />
                     ))}
                     <br />
-                    <button onClick={handleSubmit}>Iniciar simulación</button>
+                    <button onClick={handleSubmit}>Start simulation</button>
                 </form>
                 <GameBoard data={dataRounds} />
             </div>
