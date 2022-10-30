@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import GameBoard from './GameBoard';
 
@@ -7,8 +7,8 @@ import GameBoard from './GameBoard';
 function Simulation() {
 
     const [rounds, setRounds] = useState(0);
+    const [listRobots, setListRobots] = useState([])
     const [robots, setRobots] = useState([]);
-    const [checked, setChecked] = useState(new Array(robots.length).fill(false));
     const [dataRounds, setDataRounds] = useState({});
 
     const handleRounds = (event) => {
@@ -17,40 +17,13 @@ function Simulation() {
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/robots`)
-            .then(response => response.json())
-            .then(json => console.log(json))
-
-        // setRobots((robot) => [...robots, robot]);
+            .then(response => {
+                setListRobots(response.data.robots);
+            })
     }, []);
-
-    const handleChecked = (position) => {
-        const updateChaked = checked.map((element, index) =>
-            index === position ? !element : element
-        );
-
-        setChecked(updateChaked);
-
-        console.log('esta es mi variable de estado checked: ' + checked);
-    }
-
-    function Robots(props) {
-        robots.map(index => {
-            return (
-                <input
-                    type='checkbox'
-                    key={props.id}
-                    checked={checked[index]}
-                    onChange={handleChecked}
-                >
-                    {props.name}
-                </input>
-            );
-        })
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
 
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/simulation`, {
             robots: robots,
@@ -60,20 +33,34 @@ function Simulation() {
         })
 
     }
+
+    const handleChecked = useCallback((event, id) => {
+        if (event.target.checked) {
+            setRobots(value => [...value, id])
+        } else {
+            setRobots(value => value.filter(it => it !== id))
+        }
+    }, [setRobots])
     
     return (
         <>
             <h2>Simulation</h2>
             <div className='conteiner'>
                 <form>
-                    <label>Number of rounds</label>
+                    <label>Number of rounds:</label>
                     <input type='number' onChange={handleRounds} />
                     <br />
                     <br />
-                    <label>Select up to four robots</label>
+                    <label>Select up to four robots:</label>
                     <br />
-                    {robots.map((robot) => (
-                        <Robots key={robot.id} name={robot.name} />
+                    {listRobots.map((robot) => (
+                        <input 
+                            type='checkbox' 
+                            key={robot.id} 
+                            id={robot.id} 
+                            value={robot.name} 
+                            onChange={(event) => handleChecked(event, robot.id)}
+                        />    
                     ))}
                     <br />
                     <button onClick={handleSubmit}>Start simulation</button>
