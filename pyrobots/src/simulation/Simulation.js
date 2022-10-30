@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import GameBoard from './GameBoard';
 
 
 
@@ -23,15 +24,17 @@ function Simulation() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let movesAndStatus;
 
-        if(robots !== []){
+        if (robots !== []) {
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/simulation`, {
                 robots: robots,
                 rounds: rounds,
             }).then(response => {
+                movesAndStatus = response.data;
                 console.log(response) //!Ver después que hacer con el response
             })
-        }else{
+        } else {
 
         }
     }
@@ -64,19 +67,22 @@ function Simulation() {
     return (
         <>
             <h2>Simulation</h2>
-            <form>
-                <label>Cantidad de rondas</label>
-                <input type='number' onChange={handleRounds} />
-                <br />
-                <br />
-                <label>Seleccione el o los robots que desea usar en la simulación</label>
-                <br />
-                {robots.map((robot) => (
-                    <Robots key={robot.id} name={robot.name} />
-                ))}
-                <br />
-                <button onClick={handleSubmit}>Iniciar simulación</button>
-            </form>
+            <div className='conteiner'>
+                <form>
+                    <label>Cantidad de rondas</label>
+                    <input type='number' onChange={handleRounds} />
+                    <br />
+                    <br />
+                    <label>Seleccione el o los robots que desea usar en la simulación</label>
+                    <br />
+                    {robots.map((robot) => (
+                        <Robots key={robot.id} name={robot.name} />
+                    ))}
+                    <br />
+                    <button onClick={handleSubmit}>Iniciar simulación</button>
+                </form>
+                <GameBoard />
+            </div>
         </>
     )
 }
