@@ -7,26 +7,64 @@ function ListMatches() {
   const [joinedMatches, setJoinedMatches] = useState([]);
   const [joinableMatches, setJoinableMatches] = useState([]);
   const [error, setError] = useState('');
+  const [robots, setRobots] = useState([]);
+  const [selectedRobot, setSelectedRobot] = useState("");
 
   const getMatches = async () => {
     await axios.get(`${process.env.REACT_APP_BACKEND_URL}/matches`)
-    .then(function (response) {
-      setCreatedMatches(response.data.User_Games);
-      setJoinedMatches(response.data.Games_already_join)
-      setJoinableMatches(response.data.Games_To_Join);
-    })
-    .catch(function (error) {
-      setCreatedMatches([]);
-      setJoinedMatches([])
-      setJoinableMatches([]);
-      setError(error.message);
-    });
+      .then(function (response) {
+        setCreatedMatches(response.data.User_Games);
+        setJoinedMatches(response.data.Games_already_join)
+        setJoinableMatches(response.data.Games_To_Join);
+      })
+      .catch(function (error) {
+        setCreatedMatches([]);
+        setJoinedMatches([])
+        setJoinableMatches([]);
+        setError(error.message);
+      });
+  }
+
+  const getRobots = async () => {
+    await axios.get(`${process.env.REACT_APP_BACKEND_URL}/robots`)
+      .then(function (response) {
+        setRobots(response.data.robots);
+      })
+      .catch(function (error) {
+        setRobots([]);
+      });
   }
 
   useEffect(() => {
     getMatches();
+    getRobots();
   }, []);
-  
+
+  const handleJoin = (id) => {
+    setError("");
+    if (selectedRobot === "") {
+      setError("A robot must be selected");
+      return;
+    }
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/join_match`, {
+      matchId: id,
+      robotID: selectedRobot,
+      password: ""
+    })
+      .then(function (response) {
+        if (response.data.detail) {
+          alert(response.data.detail);
+          getMatches();
+        }
+        else if (response.data.error) {
+          setError(response.data.error);
+        }
+      })
+      .catch(function (error) {
+        setError(error.message);
+      });
+  }
+
   return (
     <>
       <h2>Matches</h2>
@@ -35,27 +73,37 @@ function ListMatches() {
         <h3>Created matches:</h3>
         <ul>
           {createdMaches.map((element) =>
-          <li key={element.id} >
-            {element.name}
-          </li>)}
+            <li key={element.id} >
+              {element.name}
+            </li>)}
         </ul>
       </div>
       <div data-testid="joined_matches">
         <h3>Joined matches:</h3>
         <ul>
           {joinedMatches.map((element) =>
-          <li key={element.id} >
-            {element.name}
-          </li>)}
+            <li key={element.id} >
+              {element.name}
+            </li>)}
         </ul>
       </div>
       <div data-testid="joinable_matches" >
         <h3>Matches to join:</h3>
-        <ul>
+        <div>
+          <label> Select a robot to join a match: </label>
+          <select data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
+            <option value="">-select your robot-</option>
+            {
+              robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)
+            }
+          </select>
+        </div>
+        <ul data-testid="list" >
           {joinableMatches.map((element) =>
-          <li key={element.id} >
-            {element.name}
-          </li>)}
+            <li key={element.id} >
+              {element.name}
+              <button onClick={() => handleJoin(element.id)} data-testid={`button_${element.name}`} > Join </button>
+            </li>)}
         </ul>
         {error && <div>{error}</div>}
       </div>
