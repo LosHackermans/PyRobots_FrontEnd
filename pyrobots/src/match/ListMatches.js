@@ -8,8 +8,8 @@ function ListMatches() {
   const [joinableMatches, setJoinableMatches] = useState([]);
   const [error, setError] = useState('');
 
-  const getMatches = () => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/matches`)
+  const getMatches = async () => {
+    await axios.get(`${process.env.REACT_APP_BACKEND_URL}/matches`)
     .then(function (response) {
       setCreatedMatches(response.data.User_Games);
       setJoinedMatches(response.data.Games_already_join)
@@ -31,7 +31,7 @@ function ListMatches() {
     <>
       <h2>Matches</h2>
       <button onClick={() => getMatches()} > Refresh </button>
-      <div>
+      <div data-testid="created_matches">
         <h3>Created matches:</h3>
         <ul>
           {createdMaches.map((element) =>
@@ -40,7 +40,7 @@ function ListMatches() {
           </li>)}
         </ul>
       </div>
-      <div>
+      <div data-testid="joined_matches">
         <h3>Joined matches:</h3>
         <ul>
           {joinedMatches.map((element) =>
@@ -49,7 +49,7 @@ function ListMatches() {
           </li>)}
         </ul>
       </div>
-      <div>
+      <div data-testid="joinable_matches" >
         <h3>Matches to join:</h3>
         <ul>
           {joinableMatches.map((element) =>
