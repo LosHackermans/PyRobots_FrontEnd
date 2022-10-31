@@ -47,20 +47,24 @@ function Simulation() {
             <h2>Simulation</h2>
             <div className='conteiner'>
                 <form>
-                    <label>Number of rounds:</label>
+                    <label>Number of rounds: </label>
+                    <br />
                     <input type='number' onChange={handleRounds} />
                     <br />
                     <br />
                     <label>Select up to four robots:</label>
                     <br />
-                    {listRobots.map((robot) => (
-                        <input 
+                    {listRobots.map((robot, index) => (
+                        <div key={index}>
+                            <input 
                             type='checkbox' 
                             key={robot.id} 
                             id={robot.id} 
                             value={robot.name} 
                             onChange={(event) => handleChecked(event, robot.id)}
-                        />    
+                        />
+                            <label key={robot.name}>{robot.name}</label>
+                        </div>    
                     ))}
                     <br />
                     <button onClick={handleSubmit}>Start simulation</button>
