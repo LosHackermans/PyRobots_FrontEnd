@@ -43,7 +43,7 @@ function CreateMatch() {
         if (response.data.match_id) {
           // make somthing with id_match
           console.log(response.data.match_id);
-          navigate("/list_matches"); //Todo: navigate to match's lobby
+          navigate("/matches"); //Todo: navigate to match's lobby
         }
         else if (response.data.error) {
           setErrors(response.data.error);
