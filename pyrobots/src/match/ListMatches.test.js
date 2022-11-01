@@ -94,16 +94,16 @@ describe("Join match tests", () => {
     expect(axios.get).toHaveBeenCalledTimes(2);
     const selectRobot = await screen.findByTestId("select_robot");
     const joinButton = await screen.findByTestId(`button_${matchesTest.Games_To_Join[0].name}`);
-    
+
     fireEvent.change(selectRobot, { target: { value: robotsTest.robots[0].id } })
     expect(screen.getByText(robotsTest.robots[0].name).selected).toBe(true);
-    
+
     fireEvent.click(joinButton);
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_URL}/join_match`, {
-      matchId: matchesTest.Games_To_Join[0].id,
-      robotID: `${robotsTest.robots[0].id}`,
-      password: ""
+      id_match: matchesTest.Games_To_Join[0].id,
+      id_robot: `${robotsTest.robots[0].id}`,
+      password_match: ""
     });
   })
 })
