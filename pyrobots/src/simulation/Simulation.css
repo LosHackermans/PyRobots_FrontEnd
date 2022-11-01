@@ -5,8 +5,8 @@
 }
 
 #gameBoard {
-    height: 1000px;
-    width: 1000px;
+    height: 600px;
+    width: 600px;
     background-color: rgb(136, 209, 68);
     border: 15px solid rgb(111, 109, 109);
 }

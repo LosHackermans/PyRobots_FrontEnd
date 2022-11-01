@@ -1,20 +1,65 @@
 import React, { useRef, useEffect, useState } from "react";
 import './Simulation.css';
 
+const data = {
+    rounds: [
+
+        {
+            robots: [
+                { id: 1, x: 10, y: 20 },
+                { id: 2, x: 20, y: 20 }
+            ],
+
+            missiles: []
+        },
+        {
+            robots: [
+                { id: 1, x: 20, y: 20 },
+                { id: 2, x: 300, y: 320 }
+            ],
+
+            missiles: []
+        },
+        {
+            robots: [
+                { id: 1, x: 30, y: 30 },
+                { id: 2, x: 500, y: 520 }
+            ],
+
+            missiles: []
+        },
+        {
+            robots: [
+                { id: 1, x: 740, y: 20 },
+                { id: 2, x: 40, y: 20 }
+            ],
+
+            missiles: []
+        }
+    ]
+}
 const colors = ["red", "green", "blue", "yellow"];
 
 const drawRobots = (context, coorX, coorY, color) => {
     context.beginPath()
-    context.arc(coorX, coorY, 5, 0, Math.PI * 2);
+    context.arc(coorX, coorY, 10, 0, Math.PI * 2);
     context.fillStyle = color;
     context.fill();
     context.closePath();
 }
 
-const draw = (context, canvas, x, y, color) => {
-    context.clearRect(x, y, canvas.width, canvas.height);
-    drawRobots(context, x, y, color);
-    // requestAnimationFrame(draw)
+let roundNumber = 0;
+let intervalId;
+const drawRound = (context, rounds) => {
+    context.clearRect(0, 0, 1000, 1000);
+    for (let j = 0; j < rounds[roundNumber].robots.length; j++){
+        drawRobots(context, rounds[roundNumber].robots[j].x, rounds[roundNumber].robots[j].y, colors[j%rounds[roundNumber].robots.length]);
+    }
+    roundNumber++;
+    if (roundNumber === rounds.length) {
+        console.log('entre');
+        clearInterval(intervalId);
+    }
 }
 
 function GameBoard(props) {
@@ -23,13 +68,14 @@ function GameBoard(props) {
 
     useEffect(() => {
         const canvas = canvasRef.current;
+        canvas.width = 1000;
+        canvas.height = 1000;
         const context = canvas.getContext("2d");
         setCanvasContext(context);
 
         if (props.data.rounds !== undefined) {
-            for (let i = 0; i < props.data.rounds.length; i++) {
-                draw(canvasContext, canvas, props.data.rounds[i].x, props.data.rounds[i].y, colors[i])
-            }
+            roundNumber = 0;
+            intervalId = setInterval(drawRound, 400, context, data.rounds);
         }
 
     }, [canvasRef, canvasContext, props.data.rounds]);
