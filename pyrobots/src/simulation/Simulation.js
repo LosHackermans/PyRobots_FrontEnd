@@ -66,12 +66,12 @@ function Simulation() {
             <h2>Simulation</h2>
             <div className='conteiner'>
                 <form>
-                    <label data-testid="rounds">Number of rounds: </label>
+                    <label >Number of rounds: </label>
                     <br />
-                    <input type='number' onChange={handleRounds} />
+                    <input type='number' onChange={handleRounds} data-testid="rounds" />
                     <br />
                     <br />
-                    <label data-testid="robots">Select up to four robots:</label>
+                    <label data-testid="robots" >Select up to four robots:</label>
                     <br />
                     {listRobots.map((robot, index) => (
                         <div key={index}>
@@ -81,12 +81,13 @@ function Simulation() {
                                 id={robot.id}
                                 value={robot.name}
                                 onChange={(event) => handleChecked(event, robot.id)}
+                                data-testid={`checkbox_${robot.name}`}
                             />
                             <label key={robot.name}>{robot.name}</label>
                         </div>
                     ))}
                     <br />
-                    <button onClick={handleSubmit}>Start simulation</button>
+                    <button onClick={handleSubmit} data-testid="btnStartSimulation" >Start simulation</button>
                     {message ? <p>{message}</p> : null}
                     <p>{error}</p>
                 </form>
