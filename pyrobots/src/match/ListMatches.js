@@ -47,13 +47,13 @@ function ListMatches() {
       return;
     }
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/join_match`, {
-      matchId: id,
-      robotID: selectedRobot,
-      password: ""
+      id_match: id,
+      id_robot: selectedRobot,
+      password_match: ""
     })
       .then(function (response) {
-        if (response.data.detail) {
-          alert(response.data.detail);
+        if (response.data.message) {
+          alert(response.data.message);
           getMatches();
         }
         else if (response.data.error) {
