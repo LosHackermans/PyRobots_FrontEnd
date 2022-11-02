@@ -6,7 +6,8 @@ function Upload() {
   const [robot, setRobot] = useState({
     name: '',
     avatar: '',
-    script: ''
+    script: '',
+    fileName: ''
   });
   const [error, setError] = useState("");
 
@@ -36,7 +37,7 @@ function Upload() {
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        setRobot({...robot, [e.target.name]: reader.result})
+        setRobot({...robot, [e.target.name]: reader.result, fileName: file.name})
       }
       reader.onerror = () => {
         console.log("file error", reader.error)
