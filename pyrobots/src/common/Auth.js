@@ -11,8 +11,12 @@ export const setToken = (token) => {
     localStorage.setItem('userToken', token);
 }
 
-export const fetchToken = (token) => {    // fetch the token
+export const fetchToken = () => {
     return localStorage.getItem('userToken');
+}
+
+export const deleteToken = () => {
+    localStorage.removeItem("userToken");
 }
 
 export function RequireToken({ children }) {
@@ -24,4 +28,9 @@ export function RequireToken({ children }) {
     }
 
     return children;
+}
+
+export const setupAxios = () => {
+    axios.defaults.headers.common['authorization'] = `Bearer ${fetchToken()}`;
+    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 }
