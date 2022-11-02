@@ -1,18 +1,22 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Upload() {
 
+  const navigate = useNavigate();
+
   const [robot, setRobot] = useState({
     name: '',
     avatar: '',
-    script: ''
+    script: '',
+    fileName: ''
   });
   const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    setError("")
     if (robot.name === '') {
       setError("A name is required");
       return
@@ -24,19 +28,23 @@ function Upload() {
       .then((response) => {
         if(response.status === 200) {
           alert(response.data.detail);
+          navigate("/matches"); // Todo: navigate to list robots
         };
       }).catch((error) => {
-        setError(error.message);
+        if(error.response?.data?.detail){
+          setError(error.response.data.detail);  
+        } else {
+          setError('Server error');
+        }
       })
     }
 
     const handleFileChange = e => {
-      console.log("eh entré")
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        setRobot({...robot, [e.target.name]: reader.result})
+        setRobot({...robot, [e.target.name]: reader.result, fileName: file.name})
       }
       reader.onerror = () => {
         console.log("file error", reader.error)
