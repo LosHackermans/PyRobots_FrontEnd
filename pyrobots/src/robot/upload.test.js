@@ -2,7 +2,14 @@ import React from "react";
 import Upload from "./upload";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-describe("UploadForm", () => {
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
+describe("Upload Robot", () => {
 
   test("form fields exists", () => {
     render(<Upload />);
