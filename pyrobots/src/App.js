@@ -60,7 +60,6 @@ function App() {
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
         </Routes>
-      {/* </div> */}
     </Router>
   );
 }
