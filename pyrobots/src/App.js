@@ -7,6 +7,7 @@ import Login from './login/Login';
 import ListMatches from './match/ListMatches';
 import Logout from './login/Logout';
 import Upload from './robot/upload';
+import Simulation from "./simulation/Simulation";
 import {
   BrowserRouter as Router,
   Routes,
@@ -42,6 +43,9 @@ function App() {
             <li>
               <Link to="/upload_robot">Upload robot</Link>
             </li>
+            <li>
+              <Link to="/simulation">Simulation</Link>
+            </li>
           </ul>
         </nav>
 
@@ -55,6 +59,7 @@ function App() {
           <Route path="/logout" element={<RequireToken><Logout /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
+          <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
         </Routes>
       </div>
     </Router>
