@@ -1,4 +1,4 @@
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent, act } from "@testing-library/react";
 import Simulation from './Simulation'
 import 'jest-canvas-mock'
 import axios from "axios"
@@ -72,8 +72,10 @@ afterEach(() => {
 });
 
 describe('Test of Simulation', () => {
-    test('Form fields exist', () => {
-        render(<Simulation />)
+    test('Form fields exist', async () => {
+        await act( async () => {
+            render(<Simulation />)
+        });
 
         let input = screen.getByRole('spinbutton', { name: '' })
         expect(input).toBeInTheDocument();
@@ -120,6 +122,7 @@ describe('Test of Simulation', () => {
         expect(await screen.findByText("you must select at least one robot")).toBeInTheDocument();
 
     })
+
     it("Should send a request with robots to simulate an nuber of rounds", async () => {
         render(<Simulation />)
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -131,7 +134,9 @@ describe('Test of Simulation', () => {
         fireEvent.change(inputRounds, {target: {value: roundsTest.rounds.length }});
         fireEvent.click(checkboxRobot1);
         fireEvent.click(checkboxRobot2);
-        fireEvent.click(startbtn);
+        await act( async () => {
+            fireEvent.click(startbtn);
+        });
 
         expect(axios.post).toHaveBeenCalledTimes(1);
         expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_URL}/simulation`, {
