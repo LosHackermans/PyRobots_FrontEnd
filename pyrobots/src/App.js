@@ -19,38 +19,37 @@ function App() {
   setupAxios();
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
             </li>
-            <li>
-              <Link to="/create_user">Create user</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">Login</a>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/create_user">Create user</a>
             </li>
-            <li>
-              <Link to="/logout">Logout</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/matches">Matches</a>
             </li>
-            <li>
-              <Link to="/matches">Matches</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/create_match">Create match</a>
             </li>
-            <li>
-              <Link to="/create_match">Create match</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/upload_robot">Upload robot</a>
             </li>
-            <li>
-              <Link to="/upload_robot">Upload robot</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/simulation">Simulation</a>
             </li>
-            <li>
-              <Link to="/simulation">Simulation</Link>
+            <li class="nav-item active">
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
-        </nav>
-
-        {/* A <Routes> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        </div>
+      </nav>
+    
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create_user" element={<Create_user />} />
@@ -61,7 +60,7 @@ function App() {
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
         </Routes>
-      </div>
+      {/* </div> */}
     </Router>
   );
 }
