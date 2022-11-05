@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { deleteToken } from '../common/Auth'
+import { deleteToken } from '../../helpers/Auth'
 import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
