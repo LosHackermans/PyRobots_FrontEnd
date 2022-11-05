@@ -8,6 +8,7 @@ import ListMatches from './components/match/ListMatches';
 import Logout from './components/login/Logout';
 import Upload from './components/robot/upload';
 import Simulation from "./components/simulation/Simulation";
+import Navbar from "./components/navbar/navbar"
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,37 +19,7 @@ function App() {
   setupAxios();
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">Home</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/login">Login</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/create_user">Create user</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/matches">Matches</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/create_match">Create match</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/upload_robot">Upload robot</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/simulation">Simulation</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create_user" element={<CreateUser />} />
