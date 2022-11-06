@@ -15,8 +15,8 @@ function Create_user() {
   const [error, setError] = useState('');
 
   const handleChange = (event) => {
-    const {name, value} = event.target;
-    setUser({...user, [name]: value});
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
   }
 
   const handleImageChange = (e) => {
@@ -24,11 +24,11 @@ function Create_user() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setUser({...user, [e.target.name]: reader.result})
+      setUser({ ...user, [e.target.name]: reader.result })
     }
   }
 
-  const handleSubmit = (event) => { 
+  const handleSubmit = (event) => {
     event.preventDefault();
     setMessage('');
 
@@ -38,43 +38,55 @@ function Create_user() {
       password: user.password,
       avatar: user.avatar
     }).then(response => {
-      if(response.status === 200){
+      if (response.status === 200) {
         setMessage(response.data.message)
       }
     }).catch(error => {
-      if(error.response?.data?.detail){
-        setError(error.response.data.detail);  
+      if (error.response?.data?.detail) {
+        setError(error.response.data.detail);
       } else {
         setError('Server error');
       }
-      
+
     })
   }
 
   return (
     <>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className='form-label'>Name: </label>
-          <input className='form-control' type="text" name="name" placeholder="enter your name" onChange={handleChange} required />
+      <div className="container">
+        <div className="row justify-content-center mt-5 mr-1">
+          <div className="col-md-6 my-form">
+            <div className="form-group mt-1 mx-3">
+              <h2 className="text-center">Sign Up</h2>
+              <div className="form-group">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label className='form-label'>Name: </label>
+                    <input className='form-control my-form-control' type="text" name="name" placeholder="enter your name" onChange={handleChange} required />
+                  </div>
+                  <div className="mb-3">
+                    <label className='form-label'>Email: </label>
+                    <input className='form-control my-form-control' type="text" name="email" placeholder="enter your email" onChange={handleChange} required />
+                  </div>
+                  <div className="mb-3">
+                    <label className='form-label'>Password: </label>
+                    <input className='form-control my-form-control' type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
+                  </div>
+                  <div className="mb-3" >
+                    <label className='form-label' >Avatar (optional): </label>
+                    <input className='form-control my-form-control' type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+                  </div>
+                  <div className="d-grid gap-2 col-2 mx-auto mt-4">
+                    <button className="my-btn" type='submit'>Register</button>
+                  </div>
+                  {message ? <p>{message}</p> : null}
+                  <p>{error}</p>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className='form-label'>Email: </label>
-          <input className='form-control' type="text" name="email" placeholder="enter your email" onChange={handleChange} required />
-        </div>
-        <div className="mb-3">
-          <label className='form-label'>Password: </label>
-          <input className='form-control' type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
-        </div>
-        <div className="mb-3" >
-          <label className='form-label' >Avatar (optional): </label>
-          <input className='form-control' type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
-        </div>
-        <button className="btn btn-primary" type="submit">Register</button>
-        {message ? <p>{message}</p> : null }
-        <p>{error}</p>
-      </form>
+      </div>
     </>
   );
 }

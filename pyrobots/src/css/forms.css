@@ -21,7 +21,7 @@
 .my-btn:hover {
   color: white;
   background-color: #03364B;
-  border-color: none;
+  box-shadow: 0 0 0.5rem 0.25rem #30aaca
 }
 
 .my-form-control {
