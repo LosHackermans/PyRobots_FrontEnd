@@ -64,32 +64,33 @@ function Simulation() {
     return (
         <>
             <h2>Simulation</h2>
-            <div className='conteiner'>
+            <div className='conteiner my-conteiner px-3'>
                 <form>
-                    <label >Number of rounds: </label>
-                    <br />
-                    <input type='number' onChange={handleRounds} data-testid="rounds" />
-                    <br />
-                    <br />
-                    <label data-testid="robots" >Select up to four robots:</label>
-                    <br />
-                    {listRobots.map((robot, index) => (
-                        <div key={index}>
-                            <input
-                                type='checkbox'
-                                key={robot.id}
-                                id={robot.id}
-                                value={robot.name}
-                                onChange={(event) => handleChecked(event, robot.id)}
-                                data-testid={`checkbox_${robot.name}`}
-                            />
-                            <label key={robot.name}>{robot.name}</label>
-                        </div>
-                    ))}
-                    <br />
-                    <button onClick={handleSubmit} data-testid="btnStartSimulation" >Start simulation</button>
-                    {message ? <p>{message}</p> : null}
-                    <p>{error}</p>
+                    <div>
+                        <label className="form-label" >Number of rounds: </label>
+                        <input className="form-control" type='number' onChange={handleRounds} data-testid="rounds" />
+                    </div>
+                    <div>
+                        <label className="form-label mt-3" data-testid="robots" >Select up to four robots:</label>
+                        {listRobots.map((robot, index) => (
+                            <div className="ms-2" key={index}>
+                                <input
+                                    type='checkbox'
+                                    key={robot.id}
+                                    id={robot.id}
+                                    value={robot.name}
+                                    onChange={(event) => handleChecked(event, robot.id)}
+                                    data-testid={`checkbox_${robot.name}`}
+                                />
+                                <label className="form-label ms-2" key={robot.name}>{robot.name}</label>
+                            </div>
+                        ))}
+                    </div>
+                    <button className="btn btn-primary mt-4" onClick={handleSubmit} data-testid="btnStartSimulation" >Start simulation</button>
+                    <div className="mb-3">
+                        {message ? <p>{message}</p> : null}
+                        <p>{error}</p>
+                    </div>
                 </form>
                 <GameBoard data={dataRounds} />
             </div>

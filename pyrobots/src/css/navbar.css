@@ -1,3 +1,11 @@
 .navbar-color {
   background: #021636;
 }
+
+.my-link-light {
+  color: white !important;
+}
+
+.my-link-light:hover, .my-link-light:focus {
+  color: #30aaca !important;
+}

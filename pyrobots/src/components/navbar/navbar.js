@@ -6,28 +6,28 @@ function Navbar() {
         <div>
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/">Home</a>
+              <a className="nav-link my-link-light" href="/">Home</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/login">Login</a>
+              <a className="nav-link my-link-light" href="/login">Login</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/create_user">Create user</a>
+              <a className="nav-link my-link-light" href="/create_user">Create user</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/matches">Matches</a>
+              <a className="nav-link my-link-light" href="/matches">Matches</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/create_match">Create match</a>
+              <a className="nav-link my-link-light" href="/create_match">Create match</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/upload_robot">Upload robot</a>
+              <a className="nav-link my-link-light" href="/upload_robot">Upload robot</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/simulation">Simulation</a>
+              <a className="nav-link my-link-light" href="/simulation">Simulation</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link link-light" href="/logout">Logout</a>
+              <a className="nav-link my-link-light" href="/logout">Logout</a>
             </li>
           </ul>
         </div>

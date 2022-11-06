@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import '../../css/forms.css'
 
 function ListMatches() {
 
@@ -68,8 +69,8 @@ function ListMatches() {
   return (
     <>
       <h2>Matches</h2>
-      <button onClick={() => getMatches()} > Refresh </button>
-      <div data-testid="created_matches">
+      <button className="btn btn-primary mt-3" onClick={() => getMatches()} > Refresh </button>
+      <div className="mt-3 mb-3" data-testid="created_matches">
         <h3>Created matches:</h3>
         <ul>
           {createdMaches.map((element) =>
@@ -90,8 +91,8 @@ function ListMatches() {
       <div data-testid="joinable_matches" >
         <h3>Matches to join:</h3>
         <div>
-          <label> Select a robot to join a match: </label>
-          <select data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
+          <label className="form-label"> Select a robot to join a match: </label>
+          <select className="form-select" data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
             <option value="">-select your robot-</option>
             {
               robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)

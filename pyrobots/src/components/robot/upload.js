@@ -70,21 +70,21 @@ function Upload() {
   return <div>
     <h2>Upload robot</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
-          <input placeholder="robot_name" onChange={handleInputChange} name="name" type="text" />
+        <div className="mb-3">
+          <label className="form-label">Name: </label>
+          <input className="form-control" placeholder="robot_name" onChange={handleInputChange} name="name" type="text" />
         </div>
-        <div >
-          <label >Avatar (optional): </label>
-          <input type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+        <div className="mb-3" >
+          <label className="form-label" >Avatar (optional): </label>
+          <input className="form-control" type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
         </div>
-        <div>
-          <label >Robot code: </label>
-          <input type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
+        <div className="mb-3">
+          <label className="form-label" >Robot code: </label>
+          <input className="form-control" type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
         </div>
-        <div>
-        <button type='submit'>Upload</button>
-          {error && <div><span >{error}</span></div>}
+        <div className="mb-3">
+        <button className="btn btn-primary" type='submit'>Upload</button>
+          {error && <div className="mb-3"><span >{error}</span></div>}
         </div>
       </form>
     </div>

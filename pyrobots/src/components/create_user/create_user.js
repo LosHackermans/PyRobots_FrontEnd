@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import '../../css/forms.css';
 
 function Create_user() {
 
@@ -54,25 +55,23 @@ function Create_user() {
     <>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <label>Name: </label>
-        <input type="text" name="name" placeholder="enter your name" onChange={handleChange} required />
-        <br />
-        <br />
-        <label>Email: </label>
-        <input type="text" name="email" placeholder="enter your email" onChange={handleChange} required />
-        <br />
-        <br />
-        <label>Password: </label>
-        <input type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
-        <br />
-        <br />
-        <div >
-          <label >Avatar (optional): </label>
-          <input type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+        <div className="mb-3">
+          <label className='form-label'>Name: </label>
+          <input className='form-control' type="text" name="name" placeholder="enter your name" onChange={handleChange} required />
         </div>
-        <br />
-        <br />
-        <button type="submit">Register</button>
+        <div className="mb-3">
+          <label className='form-label'>Email: </label>
+          <input className='form-control' type="text" name="email" placeholder="enter your email" onChange={handleChange} required />
+        </div>
+        <div className="mb-3">
+          <label className='form-label'>Password: </label>
+          <input className='form-control' type="password" name="password" placeholder="enter your password" onChange={handleChange} required />
+        </div>
+        <div className="mb-3" >
+          <label className='form-label' >Avatar (optional): </label>
+          <input className='form-control' type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+        </div>
+        <button className="btn btn-primary" type="submit">Register</button>
         {message ? <p>{message}</p> : null }
         <p>{error}</p>
       </form>

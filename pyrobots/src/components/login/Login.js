@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { setToken, fetchToken } from '../../helpers/Auth'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import '../../css/forms.css';
 
 // to logout: localStorage.removeItem("userToken");
 
@@ -47,20 +48,37 @@ function Login() {
 
   }
   return (
-    <>
-      <h2>Login</h2>
-      {fetchToken() ? (<p>You are logged in!</p>) : (
-        <form onSubmit={login}>
-          <label>Email: </label>
-          <input type='email' name="email" onChange={handleInputChange} />
-          <label>Password: </label>
-          <input type='password' name="password" onChange={handleInputChange} />
-          <button type='submit'>Login</button>
-          {error && <div>{error}</div>}
-        </form>
-      )
-      }
-    </>
+    <div className="container">
+      <div className="row justify-content-center pt-5 mt-5 mr-1">
+        <div className="col-md-4 my-form">
+          <div className="form-group mt-1 mx-3">
+            <h2 className="text-center">Login</h2>
+            {fetchToken() ? (<p>You are logged in!</p>) : (
+              <div className="form-group">
+                <form onSubmit={login}>
+                  <div className="mb-3">
+                    <label className="form-label">Login: </label>
+                    <input className="form-control my-form-control" type='email' name="email" onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Password: </label>
+                    <input className="form-control my-form-control" type='password' name="password" onChange={handleInputChange} />
+                  </div>
+                  <div className="d-grid gap-2 col-2 mx-auto">
+                    <button className="my-btn" type='submit'>Login</button>
+                  </div>
+                  <div className="mt-5">
+                    <div>Don't have account?</div>
+                    <a className="my-link-light" href="/create_user">Register</a>
+                  </div>
+                  {error && <div>{error}</div>}
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
