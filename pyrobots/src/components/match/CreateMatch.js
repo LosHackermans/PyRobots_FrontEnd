@@ -58,7 +58,7 @@ function CreateMatch() {
   return (
     <>
       <h2 className="mx-3 my-2">Create Match</h2>
-      <form className="mx-5 my-4" onSubmit={onSubmit}>
+      <form className="col-8 mx-5 my-4" onSubmit={onSubmit}>
         <label className="form-label">Name: </label>
         <input className="form-control my-form-control"
           data-testid="name-input"
@@ -70,7 +70,7 @@ function CreateMatch() {
 
         <div className="container text-center">
           <div className="row">
-            <div className="col-6 my-5 pe-4">
+            <div className="col-4 my-5 pe-4">
               <p>Number of players to begin match</p>
               <label className="form-label">Min: </label>
               <input className="form-control my-form-control"
@@ -89,7 +89,7 @@ function CreateMatch() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="col-6 my-5 ps-4">
+            <div className="col-4 my-5 ps-4">
 
               <label className="form-label">Number of Rounds: </label>
               <input className="form-control my-form-control"
