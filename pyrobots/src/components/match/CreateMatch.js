@@ -57,78 +57,76 @@ function CreateMatch() {
   };
   return (
     <>
-      <h2>Create Match</h2>
-      <form onSubmit={onSubmit}>
-        <div className='mb-3'>
-          <label className="form-label">Name: </label>
-          <input className="form-control"
-            data-testid="name-input"
-            type="text"
-            name="name"
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className='mb-3'>
-          <p>Number of players to begin match</p>
-          <label className="form-label">Min: </label>
-          <input className="form-control"
-            data-testid="min_players-input"
-            type="number"
-            name="min_players"
-            placeholder={match.min_players}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='mb-3'>
-          <label className="form-label">Max: </label>
-          <input className="form-control"
-            data-testid="max_players-input"
-            type="number"
-            name="max_players"
-            placeholder={match.max_players}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='mb-3'>
+      <h2 className="mx-3 my-2">Create Match</h2>
+      <form className="mx-5 my-4" onSubmit={onSubmit}>
+        <label className="form-label">Name: </label>
+        <input className="form-control my-form-control"
+          data-testid="name-input"
+          type="text"
+          name="name"
+          onChange={handleInputChange}
+          required
+        />
 
-          <label className="form-label">Number of Rounds: </label>
-          <input className="form-control"
-            data-testid="number_rounds-input"
-            type="number"
-            name="number_rounds"
-            placeholder={match.number_of_rounds}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='mb-3'>
-          <label className="form-label">Number of Games: </label>
-          <input className="form-control"
-            data-testid="number_games-input"
-            type="number"
-            name="number_games"
-            placeholder={match.number_of_games}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className='mb-3'>
-          <select className="form-select"
-            data-testid="robot-select"
-            key="robots"
-            name="id_robot"
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-select your robot-</option>
-            {robots.map((element, index) => (
-              <option key={element.id} value={element.id}>
-                {element.name}
-              </option>
-            ))}
-          </select>
+        <div className="container text-center">
+          <div className="row">
+            <div className="col-6 my-5 pe-4">
+              <p>Number of players to begin match</p>
+              <label className="form-label">Min: </label>
+              <input className="form-control my-form-control"
+                data-testid="min_players-input"
+                type="number"
+                name="min_players"
+                placeholder={match.min_players}
+                onChange={handleInputChange}
+              />
+              <label className="form-label mt-4">Max: </label>
+              <input className="form-control my-form-control"
+                data-testid="max_players-input"
+                type="number"
+                name="max_players"
+                placeholder={match.max_players}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="col-6 my-5 ps-4">
 
+              <label className="form-label">Number of Rounds: </label>
+              <input className="form-control my-form-control"
+                data-testid="number_rounds-input"
+                type="number"
+                name="number_rounds"
+                placeholder={match.number_of_rounds}
+                onChange={handleInputChange}
+              />
+              <label className="form-label mt-4">Number of Games: </label>
+              <input className="form-control my-form-control"
+                data-testid="number_games-input"
+                type="number"
+                name="number_games"
+                placeholder={match.number_of_games}
+                onChange={handleInputChange}
+              />
+
+              <select className="form-select mt-5"
+                data-testid="robot-select"
+                key="robots"
+                name="id_robot"
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">-select your robot-</option>
+                {robots.map((element, index) => (
+                  <option key={element.id} value={element.id}>
+                    {element.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
-        <button className="btn btn-primary" type="submit">Create Match</button>
+
+        <button className="my-btn" type="submit">Create Match</button>
         {error && <div>{error}</div>}
       </form>
     </>
