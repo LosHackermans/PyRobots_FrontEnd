@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import '../../css/forms.css'
+import '../../css/listMatches.css'
 
 function ListMatches() {
 
@@ -67,45 +69,45 @@ function ListMatches() {
 
   return (
     <>
-      <h2>Matches</h2>
-      <button onClick={() => getMatches()} > Refresh </button>
-      <div data-testid="created_matches">
-        <h3>Created matches:</h3>
-        <ul>
-          {createdMaches.map((element) =>
-            <li key={element.id} >
-              {element.name}
-            </li>)}
-        </ul>
-      </div>
-      <div data-testid="joined_matches">
-        <h3>Joined matches:</h3>
-        <ul>
-          {joinedMatches.map((element) =>
-            <li key={element.id} >
-              {element.name}
-            </li>)}
-        </ul>
-      </div>
-      <div data-testid="joinable_matches" >
-        <h3>Matches to join:</h3>
-        <div>
-          <label> Select a robot to join a match: </label>
-          <select data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
-            <option value="">-select your robot-</option>
-            {
-              robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)
-            }
-          </select>
+      <h2 className="mx-3 my-2">Matches</h2>
+      <button className="my-btn mx-3 my-2" onClick={() => getMatches()} > Refresh </button>
+      <div className="policy-table mx-3">
+        <div className="row">
+          <ul className="col-6 mt-3 mb-3" data-testid="created_matches">
+            <h3>Created matches:</h3>
+            {createdMaches.map((element) =>
+              <li className="policy" key={element.id} >
+                {element.name}
+              </li>)}
+          </ul>
+          <ul className="col-6 mt-3 mb-3" data-testid="joined_matches">
+            <h3>Joined matches:</h3>
+            {joinedMatches.map((element) =>
+              <li className="policy" key={element.id} >
+                {element.name}
+              </li>)}
+          </ul>
         </div>
-        <ul data-testid="list" >
-          {joinableMatches.map((element) =>
-            <li key={element.id} >
-              {element.name}
-              <button onClick={() => handleJoin(element.id)} data-testid={`button_${element.name}`} > Join </button>
-            </li>)}
-        </ul>
-        {error && <div>{error}</div>}
+        <div data-testid="joinable_matches" >
+          <h3>Matches to join:</h3>
+          <ul className="mt-3" data-testid="list" >
+            {joinableMatches.map((element) =>
+              <li className="policy" key={element.id} >
+                {element.name}
+                <button className="my-btn my-btn-list" onClick={() => handleJoin(element.id)} data-testid={`button_${element.name}`} > Join </button>
+              </li>)}
+          </ul>
+          <div id="select-robot">
+            <label className="form-label"> Select a robot to join a match: </label>
+            <select className="form-select my-form-control" data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
+              <option value="">-select your robot-</option>
+              {
+                robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)
+              }
+            </select>
+          </div>
+          {error && <div>{error}</div>}
+        </div>
       </div>
     </>
   )

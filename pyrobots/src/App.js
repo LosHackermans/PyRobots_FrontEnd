@@ -1,58 +1,28 @@
-import './App.css';
-import { RequireToken, setupAxios } from './common/Auth'
-import Create_user from "./create_user/create_user";
-import CreateMatch from './match/CreateMatch';
-import Home from './home/home';
-import Login from './login/Login';
-import ListMatches from './match/ListMatches';
-import Logout from './login/Logout';
-import Upload from './robot/upload';
-import Simulation from "./simulation/Simulation";
+import './css/App.css';
+import { RequireToken, setupAxios } from './helpers/Auth'
+import CreateUser from "./components/create_user/create_user";
+import CreateMatch from './components/match/CreateMatch';
+import Home from './components/home/home';
+import Login from './components/login/Login';
+import ListMatches from './components/match/ListMatches';
+import Logout from './components/login/Logout';
+import Upload from './components/robot/upload';
+import Simulation from "./components/simulation/Simulation";
+import Navbar from "./components/navbar/navbar"
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link,
+  Route
 } from "react-router-dom";
 
 function App() {
   setupAxios();
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">Home</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/login">Login</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/create_user">Create user</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/matches">Matches</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/create_match">Create match</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/upload_robot">Upload robot</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/simulation">Simulation</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create_user" element={<Create_user />} />
+          <Route path="/create_user" element={<CreateUser />} />
           <Route path="/login" element={<Login />} />
           <Route path="/matches" element={<RequireToken><ListMatches /></RequireToken>} />
           <Route path="/logout" element={<RequireToken><Logout /></RequireToken>} />

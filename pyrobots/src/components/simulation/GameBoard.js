@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import './Simulation.css';
+import '../../css/Simulation.css';
 
 const colors = ["red", "green", "blue", "yellow"];
 
