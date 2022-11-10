@@ -63,12 +63,12 @@ function Simulation() {
 
     return (
         <>
-            <h2>Simulation</h2>
+            <h2 className="mx-3 my-2">Simulation</h2>
             <div className='conteiner my-conteiner px-3'>
                 <form>
                     <div>
                         <label className="form-label" >Number of rounds: </label>
-                        <input className="form-control" type='number' onChange={handleRounds} data-testid="rounds" />
+                        <input className="form-control my-form-control" type='number' onChange={handleRounds} data-testid="rounds" />
                     </div>
                     <div>
                         <label className="form-label mt-3" data-testid="robots" >Select up to four robots:</label>
@@ -86,7 +86,7 @@ function Simulation() {
                             </div>
                         ))}
                     </div>
-                    <button className="btn btn-primary mt-4" onClick={handleSubmit} data-testid="btnStartSimulation" >Start simulation</button>
+                    <button className="my-btn mt-4" onClick={handleSubmit} data-testid="btnStartSimulation" >Start simulation</button>
                     <div className="mb-3">
                         {message ? <p>{message}</p> : null}
                         <p>{error}</p>

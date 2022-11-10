@@ -57,7 +57,7 @@ function Login() {
               <div className="form-group">
                 <form onSubmit={login}>
                   <div className="mb-3">
-                    <label className="form-label">Login: </label>
+                    <label className="form-label">Email: </label>
                     <input className="form-control my-form-control" type='email' name="email" onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
