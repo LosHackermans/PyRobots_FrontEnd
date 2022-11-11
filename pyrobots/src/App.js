@@ -14,6 +14,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import ListRobots from './components/robot/ListRobots';
 
 function App() {
   setupAxios();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/logout" element={<RequireToken><Logout /></RequireToken>} />
           <Route path="/create_match" element={<RequireToken><CreateMatch /></RequireToken>} />
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
+          <Route path="/robots" element={<RequireToken><ListRobots /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
         </Routes>
     </Router>

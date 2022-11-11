@@ -1,0 +1,54 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import "./../../css/robot/ListRobots.css"
+
+function ListRobots() {
+  const [robots, setRobots] = useState([]);
+
+  const getRobots = async () => {
+    await axios.get(`${process.env.REACT_APP_BACKEND_URL}/robots`)
+      .then(function (response) {
+        setRobots(response.data.robots);
+      })
+      .catch(function (error) {
+        setRobots([]);
+      });
+  }
+
+  useEffect(() => {
+    getRobots();
+  }, []);
+
+  return (
+    <div className="container">
+      <div className="row justify-content-center pt-5 mt-5 mr-1">
+        <div className="col-md-6 my-form">
+        <h2 className="text-center" >Your robots</h2>
+        <hr></hr>
+          <div className="people-nearby">
+            {robots.map((element) =>
+              <div className="nearby-user" key={element.id} >
+                <div className="row" >
+                  <div className="col-md-2 col-sm-2" >
+                    <img src={element.avatar} alt="user" className="profile-photo-lg" ></img>
+                  </div>
+                  <div className="col-md-6 col-sm-6" >
+                    <h5>{element.name}</h5>
+                  </div>
+                  <div className="col-md-4 col-sm-4" >
+                    <a>Won matches: {element.games_won} </a> <br/>
+                    <a>Tied matches: {element.games_draw} </a> <br/>
+                    <a>Played matches: {element.games_played} </a>
+                  </div>
+                </div>
+                <hr></hr>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ListRobots;
