@@ -28,12 +28,12 @@ function ListRobots() {
   return (
     <div className="container">
       <div className="row justify-content-center pt-5 mt-5 mr-1">
-        <div className="col-md-6 my-form">
+        <div className="col-md-6 box">
           <h2 className="text-center" >Your robots</h2>
           <hr></hr>
-          <div className="people-nearby">
+          <div className="robots-list">
             {robots.map((element) =>
-              <div className="nearby-user" key={element.id} data-testid={`robot_${element.name}`} >
+              <div className="robot-item" key={element.id} data-testid={`robot_${element.name}`} >
                 <div className="row" >
                   <div className="col-md-2 col-sm-2" >
                     <img src={element.avatar} alt="user" className="profile-photo-lg" ></img>
