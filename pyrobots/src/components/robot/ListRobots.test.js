@@ -4,6 +4,13 @@ import axios from "axios"
 import { act } from "react-dom/test-utils";
 
 jest.mock('axios');
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 
 const robotsTest = {
   'robots': [
@@ -60,11 +67,45 @@ describe("List robots tests", () => {
     })
     expect(axios.get).toHaveBeenCalledTimes(1);
     for (let i = 0; i < robotsTest.robots.length; i++) {
-      expect(await screen.findByText(robotsTest.robots[i].name)).toBeInTheDocument();
+      const { findByText } = within(screen.getByTestId(`robot_${robotsTest.robots[i].name}`));
+      expect(await findByText(robotsTest.robots[i].name)).toBeInTheDocument();
     }
   });
 
-  it.todo("Should show the avatar of each robot");
-  
-  it.todo("Should show statistics of each robot");
+  it("Should show the avatar of each robot", async () => {
+    await act(async () => {
+      render(<ListRobots />);
+    })
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    for (let i = 0; i < robotsTest.robots.length; i++) {
+      const robot_div = screen.getByTestId(`robot_${robotsTest.robots[i].name}`);
+      const testImage = robot_div.querySelector("img");
+      expect(testImage.src).toContain(robotsTest.robots[i].avatar);
+    }
+  });
+
+  it("Should show statistics of each robot", async () => {
+    await act(async () => {
+      render(<ListRobots />);
+    })
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    for (let i = 0; i < robotsTest.robots.length; i++) {
+      const { findByText } = within(screen.getByTestId(`robot_${robotsTest.robots[i].name}`));
+      expect(await findByText(`Won matches:`)).toBeInTheDocument();
+      expect(await findByText(`Tied matches:`)).toBeInTheDocument();
+      expect(await findByText(`Played matches:`)).toBeInTheDocument();
+    }
+  });
+
+  it("Should navigate to /upload_robot when button is clicked", async () => {
+    await act(async () => {
+      render(<ListRobots />);
+    })
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    const upload_button = screen.getByRole('button', { name: /Add a new robot/i });
+    expect(upload_button).toBeInTheDocument();
+    fireEvent.click(upload_button);
+    expect(mockedUsedNavigate).toBeCalledTimes(1);
+    expect(mockedUsedNavigate).toBeCalledWith("/upload_robot");
+  });
 })

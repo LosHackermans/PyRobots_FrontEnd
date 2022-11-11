@@ -33,7 +33,7 @@ function ListRobots() {
           <hr></hr>
           <div className="people-nearby">
             {robots.map((element) =>
-              <div className="nearby-user" key={element.id} >
+              <div className="nearby-user" key={element.id} data-testid={`robot_${element.name}`} >
                 <div className="row" >
                   <div className="col-md-2 col-sm-2" >
                     <img src={element.avatar} alt="user" className="profile-photo-lg" ></img>
@@ -52,7 +52,7 @@ function ListRobots() {
             )}
           </div>
           <div className="d-grid gap-2 col-3 mx-auto mt-4">
-            <button className="my-btn" onClick={handleClick} >Add a new robot</button>
+            <button className="my-btn" onClick={handleClick} data-testid="upload" >Add a new robot</button>
           </div>
         </div>
       </div>
