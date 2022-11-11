@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import "./../../css/robot/ListRobots.css"
 
 function ListRobots() {
+  const navigate = useNavigate();
   const [robots, setRobots] = useState([]);
 
   const getRobots = async () => {
@@ -19,12 +21,16 @@ function ListRobots() {
     getRobots();
   }, []);
 
+  function handleClick() {
+    navigate("/upload_robot");
+  }
+
   return (
     <div className="container">
       <div className="row justify-content-center pt-5 mt-5 mr-1">
         <div className="col-md-6 my-form">
-        <h2 className="text-center" >Your robots</h2>
-        <hr></hr>
+          <h2 className="text-center" >Your robots</h2>
+          <hr></hr>
           <div className="people-nearby">
             {robots.map((element) =>
               <div className="nearby-user" key={element.id} >
@@ -36,14 +42,17 @@ function ListRobots() {
                     <h5>{element.name}</h5>
                   </div>
                   <div className="col-md-4 col-sm-4" >
-                    <a>Won matches: {element.games_won} </a> <br/>
-                    <a>Tied matches: {element.games_draw} </a> <br/>
+                    <a>Won matches: {element.games_won} </a> <br />
+                    <a>Tied matches: {element.games_draw} </a> <br />
                     <a>Played matches: {element.games_played} </a>
                   </div>
                 </div>
                 <hr></hr>
               </div>
             )}
+          </div>
+          <div className="d-grid gap-2 col-3 mx-auto mt-4">
+            <button className="my-btn" onClick={handleClick} >Add a new robot</button>
           </div>
         </div>
       </div>
