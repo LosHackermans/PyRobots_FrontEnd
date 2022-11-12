@@ -25,6 +25,9 @@ function Navbar() {
               <a className="nav-link my-link-light" href="/create_match">Create match</a>
             </li>
             <li className="nav-item active">
+              <a className="nav-link my-link-light" href="/robots">Robots</a>
+            </li>
+            <li className="nav-item active">
               <a className="nav-link my-link-light" href="/upload_robot">Upload robot</a>
             </li>
             <li className="nav-item active">

@@ -29,7 +29,7 @@ function Upload() {
       .then((response) => {
         if (response.status === 200) {
           alert(response.data.detail);
-          navigate("/matches"); // Todo: navigate to list robots
+          navigate("/robots");
         };
       }).catch((error) => {
         if (error.response?.data?.detail) {
