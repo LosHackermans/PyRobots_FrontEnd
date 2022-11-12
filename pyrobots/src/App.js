@@ -9,12 +9,13 @@ import Logout from './components/login/Logout';
 import Upload from './components/robot/upload';
 import Simulation from "./components/simulation/Simulation";
 import Navbar from "./components/navbar/navbar"
+import ListRobots from './components/robot/ListRobots';
+import VerifyUser from './components/user/VerifyUser';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
-import ListRobots from './components/robot/ListRobots';
 
 function App() {
   setupAxios();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
           <Route path="/robots" element={<RequireToken><ListRobots /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
+          <Route path="/verify_user" element={<RequireToken><VerifyUser /></RequireToken>} />
         </Routes>
     </Router>
   );
