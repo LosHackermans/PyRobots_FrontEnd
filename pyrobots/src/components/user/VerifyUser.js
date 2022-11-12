@@ -46,6 +46,7 @@ function VerifyUser() {
           <hr></hr>
           <form onSubmit={handleSubmit} >
             <div>
+              <p>Verifying your account will allow you to log in and enjoy all the features of pyRobots.</p>
               <label>Enter your verification code: </label>
               <br />
               <input type="text" name="code" onChange={handleChange} data-testid="code_input" required ></input>
