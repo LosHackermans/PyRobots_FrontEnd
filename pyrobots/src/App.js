@@ -1,6 +1,6 @@
 import './css/App.css';
 import { RequireToken, setupAxios } from './helpers/Auth'
-import CreateUser from "./components/create_user/create_user";
+import CreateUser from "./components/user/create_user";
 import CreateMatch from './components/match/CreateMatch';
 import Home from './components/home/home';
 import Login from './components/login/Login';
