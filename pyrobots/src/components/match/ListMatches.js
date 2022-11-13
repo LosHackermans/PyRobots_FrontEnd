@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import '../../css/forms.css'
-import '../../css/listMatches.css'
+import '../../css/forms.css';
+import '../../css/listMatches.css';
 
 function ListMatches() {
+  const navigate = useNavigate();
 
   const [createdMaches, setCreatedMatches] = useState([]);
   const [joinedMatches, setJoinedMatches] = useState([]);
@@ -54,9 +56,8 @@ function ListMatches() {
       password_match: ""
     })
       .then(function (response) {
-        if (response.data.message) {
-          alert(response.data.message);
-          getMatches();
+        if (response.data.match_id) {
+          navigate(`/lobby/${response.data.match_id}`);
         }
         else if (response.data.error) {
           setError(response.data.error);

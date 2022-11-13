@@ -5,10 +5,11 @@ import CreateMatch from './components/match/CreateMatch';
 import Home from './components/home/home';
 import Login from './components/login/Login';
 import ListMatches from './components/match/ListMatches';
+import Lobby from './components/match/Lobby';
 import Logout from './components/login/Logout';
 import Upload from './components/robot/upload';
 import Simulation from "./components/simulation/Simulation";
-import Navbar from "./components/navbar/navbar"
+import Navbar from "./components/navbar/navbar";
 import {
   BrowserRouter as Router,
   Routes,
@@ -31,6 +32,7 @@ function App() {
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
           <Route path="/robots" element={<RequireToken><ListRobots /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
+          <Route path="/lobby/:id" element={<RequireToken><Lobby /></RequireToken>} />
         </Routes>
     </Router>
   );
