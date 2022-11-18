@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../../css/forms.css';
 
-// to logout: localStorage.removeItem("userToken");
-
 function Login() {
   const navigate = useNavigate();
 
@@ -53,7 +51,7 @@ function Login() {
         <div className="col-md-4 my-form">
           <div className="form-group mt-1 mx-3">
             <h2 className="text-center">Login</h2>
-            {fetchToken() ? (<p>You are logged in!</p>) : (
+            {fetchToken() ? navigate("/matches") : (
               <div className="form-group">
                 <form onSubmit={login}>
                   <div className="mb-3">
