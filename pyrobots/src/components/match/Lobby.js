@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import ButtonLobby from './ButtonLobby';
 
 const Lobby = () => {
     let { id } = useParams();
@@ -10,7 +11,7 @@ const Lobby = () => {
         ws.onmessage = function (event) {
             setRobots(JSON.parse(event.data));
         }
-    }, []);
+    }, [id]);
 
     if (!robots) return;
     return (
@@ -30,7 +31,7 @@ const Lobby = () => {
                         </div>
                     </div>)
                 }
-                <button className="my-btn">?</button>
+                <ButtonLobby owner={robots.Creator.Owner}/>
             </div>
         </div>
     )
