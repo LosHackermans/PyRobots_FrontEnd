@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./../../css/robot/ListRobots.css"
+import Navbar from "../navbar/navbar";
 
 function ListRobots() {
   const navigate = useNavigate();
@@ -26,37 +27,40 @@ function ListRobots() {
   }
 
   return (
-    <div className="container">
-      <div className="row justify-content-center pt-5 mt-5 mr-1">
-        <div className="col-md-6 box">
-          <h2 className="text-center" >Your robots</h2>
-          <hr></hr>
-          <div className="robots-list">
-            {robots.map((element) =>
-              <div className="robot-item" key={element.id} data-testid={`robot_${element.name}`} >
-                <div className="row" >
-                  <div className="col-md-2 col-sm-2" >
-                    <img src={element.avatar} alt="user" className="profile-photo-lg" ></img>
+    <>
+      <Navbar />
+      <div className="container">
+        <div className="row justify-content-center pt-5 mt-5 mr-1">
+          <div className="col-md-6 box">
+            <h2 className="text-center" >Your robots</h2>
+            <hr></hr>
+            <div className="robots-list">
+              {robots.map((element) =>
+                <div className="robot-item" key={element.id} data-testid={`robot_${element.name}`} >
+                  <div className="row" >
+                    <div className="col-md-2 col-sm-2" >
+                      <img src={element.avatar} alt="user" className="profile-photo-lg" ></img>
+                    </div>
+                    <div className="col-md-6 col-sm-6" >
+                      <h5>{element.name}</h5>
+                    </div>
+                    <div className="col-md-4 col-sm-4" >
+                      <a>Won matches: {element.games_won} </a> <br />
+                      <a>Tied matches: {element.games_draw} </a> <br />
+                      <a>Played matches: {element.games_played} </a>
+                    </div>
                   </div>
-                  <div className="col-md-6 col-sm-6" >
-                    <h5>{element.name}</h5>
-                  </div>
-                  <div className="col-md-4 col-sm-4" >
-                    <a>Won matches: {element.games_won} </a> <br />
-                    <a>Tied matches: {element.games_draw} </a> <br />
-                    <a>Played matches: {element.games_played} </a>
-                  </div>
+                  <hr></hr>
                 </div>
-                <hr></hr>
-              </div>
-            )}
-          </div>
-          <div className="d-grid gap-2 col-3 mx-auto mt-4">
-            <button className="my-btn" onClick={handleClick} data-testid="upload" >Add a new robot</button>
+              )}
+            </div>
+            <div className="d-grid gap-2 col-3 mx-auto mt-4">
+              <button className="my-btn" onClick={handleClick} data-testid="upload" >Add a new robot</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

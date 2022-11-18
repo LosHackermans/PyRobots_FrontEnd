@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import '../../css/forms.css'
 import '../../css/listMatches.css'
+import Navbar from '../navbar/navbar';
 
 function ListMatches() {
 
@@ -69,6 +70,7 @@ function ListMatches() {
 
   return (
     <>
+      <Navbar />
       <h2 className="mx-3 my-2">Matches</h2>
       <button className="my-btn mx-3 my-2" onClick={() => getMatches()} > Refresh </button>
       <div className="policy-table mx-3">
