@@ -27,7 +27,7 @@ const ButtonLobby = (props) => {
     const [error, setError] = useState('');
     const [result, setResult] = useState('');
     const navigate = useNavigate();
-    const { match_id } = useParams();
+    const { id } = useParams();
 
     const getProfile = async () => {
         await axios.get(`${process.env.REACT_APP_BACKEND_URL}/profile`)
@@ -40,7 +40,7 @@ const ButtonLobby = (props) => {
     }
 
     const leaveMatch = async () => {
-        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/abandon/${match_id}`)
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/abandon/${id}`)
             .then(function (response) {
                 if (response.data.detail) navigate('/matches');
             })
@@ -50,10 +50,13 @@ const ButtonLobby = (props) => {
     }
 
     const beginMatch = async () => {
-        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/start/${match_id}`)
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/start/${id}`)
             .then(function (response) {
                 if (response.data.result) {
-                    setResult(response.data.result);
+                    setResult(response.data.Result);
+                }
+                if (response.data.detail) {
+                    setError(response.data.detail)
                 }
             })
             .catch(function (error) {
@@ -73,7 +76,7 @@ const ButtonLobby = (props) => {
                     result &&
                     proccessResults(result)
                 }
-                <button className="my-btn" onClick={beginMatch}>Iniciar Partida</button>
+                <button className="my-btn w-auto" onClick={beginMatch}>Iniciar Partida</button>
                 {error && <div>{error}</div>}
             </>
         )
@@ -81,7 +84,7 @@ const ButtonLobby = (props) => {
     else {
         return (
             <>
-                <button className="my-btn" onClick={leaveMatch}>Abandonar</button>
+                <button className="my-btn w-auto" onClick={leaveMatch}>Abandonar</button>
                 {error && <div>{error}</div>}
             </>
         )

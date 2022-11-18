@@ -68,49 +68,53 @@ function ListMatches() {
       });
   }
 
+  const goLobby = (id) => {
+    navigate(`/lobby/${id}`);
+  }
+
   return (
-    <>
-      <h2 className="mx-3 my-2">Matches</h2>
-      <button className="my-btn mx-3 my-2" onClick={() => getMatches()} > Refresh </button>
-      <div className="policy-table mx-3">
-        <div className="row">
-          <ul className="col-6 mt-3 mb-3" data-testid="created_matches">
-            <h3>Created matches:</h3>
-            {createdMaches.map((element) =>
-              <li className="policy" key={element.id} >
-                {element.name}
-              </li>)}
-          </ul>
-          <ul className="col-6 mt-3 mb-3" data-testid="joined_matches">
-            <h3>Joined matches:</h3>
-            {joinedMatches.map((element) =>
-              <li className="policy" key={element.id} >
-                {element.name}
-              </li>)}
-          </ul>
-        </div>
-        <div data-testid="joinable_matches" >
-          <h3>Matches to join:</h3>
-          <ul className="mt-3" data-testid="list" >
-            {joinableMatches.map((element) =>
-              <li className="policy" key={element.id} >
-                {element.name}
-                <button className="my-btn my-btn-list" onClick={() => handleJoin(element.id)} data-testid={`button_${element.name}`} > Join </button>
-              </li>)}
-          </ul>
-          <div id="select-robot">
-            <label className="form-label"> Select a robot to join a match: </label>
-            <select className="form-select my-form-control" data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
-              <option value="">-select your robot-</option>
-              {
-                robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)
-              }
-            </select>
-          </div>
+    <div className="my-form container policy-table mt-3">
+      <div className="row"><button className="my-btn mx-2 w-auto" onClick={() => getMatches()} > Refresh </button></div>
+      <div className="row">
+        <ul className="col-6 mt-3 mb-3" data-testid="created_matches">
+          <h3>Created matches:</h3>
+          {createdMaches.map((element) =>
+            <li className="policy" key={element.id} >
+              {element.name}
+              <button className="my-btn my-btn-list" onClick={() => goLobby(element.id)} data-testid={`button_${element.name}`} > Lobby </button>
+            </li>)}
+        </ul>
+        <ul className="col-6 mt-3 mb-3" data-testid="joined_matches">
+          <h3>Joined matches:</h3>
+          {joinedMatches.map((element) =>
+            <li className="policy" key={element.id} >
+              {element.name}
+              <button className="my-btn my-btn-list" onClick={() => goLobby(element.id)} data-testid={`button_${element.name}`} > Lobby </button>
+            </li>)}
+        </ul>
+      </div>
+      <div className="row">
+        <div className="col-4"><h3>Matches to join:</h3></div>
+        <div className="col-8" id="select-robot">
+          <select className="form-select my-form-control" data-testid="select_robot" key="robots" name="id_robot" onChange={(event) => setSelectedRobot(event.target.value)} required>
+            <option value="">-select your robot-</option>
+            {
+              robots.map((element) => <option key={element.id} data-test={`option_${element.id}`} value={element.id}>{element.name}</option>)
+            }
+          </select>
           {error && <div>{error}</div>}
         </div>
       </div>
-    </>
+      <div className="row" data-testid="joinable_matches" >
+        <ul className="mt-3" data-testid="list" >
+          {joinableMatches.map((element) =>
+            <li className="policy" key={element.id} >
+              {element.name}
+              <button className="my-btn my-btn-list" onClick={() => handleJoin(element.id)} data-testid={`button_${element.name}`} > Join </button>
+            </li>)}
+        </ul>
+      </div>
+    </div>
   )
 }
 

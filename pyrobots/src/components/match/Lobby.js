@@ -24,15 +24,15 @@ const Lobby = () => {
                     </div>
                 </div>
                 {robots.Players.map((element) =>
-                    <div className="col-6 mb-3">
-                        <div className="box" key={element.Player}>
+                    <div className="col-6 mb-3" key={element.Player}>
+                        <div className="box">
                             <h1>{element.Player}</h1>
                             <h2>{element.Robot_name}</h2>
                         </div>
                     </div>)
                 }
-                <ButtonLobby owner={robots.Creator.Owner}/>
             </div>
+            <ButtonLobby owner={robots.Creator.Owner}/>
         </div>
     )
 }
