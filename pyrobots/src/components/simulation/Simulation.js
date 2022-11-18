@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import GameBoard from './GameBoard';
-import Navbar from '../navbar/navbar';
 
 
 
@@ -64,7 +63,6 @@ function Simulation() {
 
     return (
         <>
-            <Navbar />
             <h2 className="mx-3 my-2">Simulation</h2>
             <div className='conteiner my-conteiner px-3'>
                 <form>

@@ -7,6 +7,7 @@ import ListMatches from './components/match/ListMatches';
 import Logout from './components/login/Logout';
 import Upload from './components/robot/upload';
 import Simulation from "./components/simulation/Simulation";
+import Navbar from './components/navbar/navbar';
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,7 +18,9 @@ import ListRobots from './components/robot/ListRobots';
 function App() {
   setupAxios();
   return (
+    <>
     <Router>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/create_user" element={<CreateUser />} />
@@ -29,6 +32,7 @@ function App() {
         <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
       </Routes>
     </Router>
+    </>
   );
 }
 

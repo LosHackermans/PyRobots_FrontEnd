@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./../../css/robot/ListRobots.css"
-import Navbar from "../navbar/navbar";
 
 function ListRobots() {
   const navigate = useNavigate();
@@ -27,8 +26,6 @@ function ListRobots() {
   }
 
   return (
-    <>
-      <Navbar />
       <div className="container">
         <div className="row justify-content-center pt-5 mt-5 mr-1">
           <div className="col-md-6 box">
@@ -60,7 +57,6 @@ function ListRobots() {
           </div>
         </div>
       </div>
-    </>
   );
 }
 

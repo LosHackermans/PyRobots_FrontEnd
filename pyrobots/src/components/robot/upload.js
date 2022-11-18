@@ -2,7 +2,6 @@ import '../../css/forms.css'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Navbar from '../navbar/navbar';
 import "./../../css/robot/UploadRobot.css"
 
 function Upload() {
@@ -76,7 +75,6 @@ function Upload() {
 
   return (
     <>
-      <Navbar />
       <div className="container">
         <div className="row justify-content-center pt-5 mt-5 mr-1">
           <div className="col-md-6 box">

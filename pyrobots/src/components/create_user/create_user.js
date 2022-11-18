@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import '../../css/forms.css';
+import { useNavigate } from "react-router-dom";
 
 function Create_user() {
-
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -51,6 +52,10 @@ function Create_user() {
     })
   }
 
+  const goLogin = () => {
+    navigate('/')
+  }
+
   return (
     <>
       <div className="container">
@@ -76,7 +81,8 @@ function Create_user() {
                     <label className='form-label' >Avatar (optional): </label>
                     <input className='form-control my-form-control' type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
                   </div>
-                  <div className="d-grid gap-2 col-2 mx-auto mt-4">
+                  <div className="mx-auto mt-4">
+                    <button className="my-btn" onClick={goLogin} >Go back to Login</button>
                     <button className="my-btn" type='submit'>Register</button>
                   </div>
                   {message ? <p>{message}</p> : null}

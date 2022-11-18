@@ -4,6 +4,11 @@ import Create_user from "./create_user";
 import axios from "axios"
 
 jest.mock('axios');
+const mockedUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe("Tests of create_users", () => {
     test("form fields exist", () => {

@@ -1,6 +1,10 @@
 import '../../css/navbar.css';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
+  const location = useLocation();
+  if (location.pathname === "/" || location.pathname === "/create_user") return;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-color">
       <div className="container-fluid">
@@ -10,16 +14,16 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/matches">Matches</a>
+              <Link className="nav-link my-link-light" to="/matches">Matches</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/robots">Robots</a>
+              <Link className="nav-link my-link-light" to="/robots">Robots</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/simulation">Simulation</a>
+              <Link className="nav-link my-link-light" to="/simulation">Simulation</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/logout">Logout</a>
+              <Link className="nav-link my-link-light" to="/logout">Logout</Link>
             </li>
           </ul>
         </div>
