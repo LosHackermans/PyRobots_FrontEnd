@@ -11,13 +11,13 @@ jest.mock('react-router-dom', () => ({
 }));
 window.alert = jest.fn();
 
-const mockRequests = () => {
-  axios.post.mockImplementation(() => Promise.resolve({ status: 200, data: { detail: "User validated" } }));
-}
+// const mockRequests = () => {
+//   axios.post.mockImplementation(() => Promise.resolve({ status: 200, data: { message: "User validated" } }));
+// }
 
-beforeEach(async () => {
-  mockRequests();
-})
+// beforeEach(async () => {
+//   mockRequests();
+// })
 
 afterEach(() => {
   cleanup();
@@ -56,6 +56,7 @@ describe("Validate user tests", () => {
 
   it("Should send a request with the code", async () => {
     render(<VerifyUser />);
+    axios.post.mockImplementation(() => Promise.resolve({ status: 200, data: { message: "User validated" } }));
 
     const emailInput = await screen.findByTestId("email_input");
     const codeInput = await screen.findByTestId("code_input");
@@ -75,5 +76,28 @@ describe("Validate user tests", () => {
     expect(window.alert).toBeCalledWith("User validated");
     expect(mockedUsedNavigate).toBeCalledTimes(1);
     expect(mockedUsedNavigate).toBeCalledWith("/login");
+  });
+
+  it("Should show an error if token is not correct", async () => {
+    render(<VerifyUser />);
+    axios.post.mockImplementation(() => Promise.resolve({ status: 200, data: { error: "Invalid token" } }));
+
+    const emailInput = await screen.findByTestId("email_input");
+    const codeInput = await screen.findByTestId("code_input");
+    const validateButton = await screen.findByTestId("validate_button");
+
+    fireEvent.change(emailInput, {target: {value: 'example@mail.com'}});
+    fireEvent.change(codeInput, {target: {value: 'code'}});
+    fireEvent.click(validateButton);
+    
+    expect(codeInput).toBeValid();
+    expect(axios.post).toBeCalledTimes(1);
+    expect(axios.post).toBeCalledWith(`${process.env.REACT_APP_BACKEND_URL}/validate_user`, {
+      email: 'example@mail.com',
+      token: 'code'
+    });
+    expect(await window.alert).toBeCalledTimes(0);
+    expect(mockedUsedNavigate).toBeCalledTimes(0);
+    expect(await screen.findByText("Invalid token")).toBeInTheDocument();
   });
 });

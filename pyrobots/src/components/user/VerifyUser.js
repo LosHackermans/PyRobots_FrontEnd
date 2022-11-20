@@ -23,15 +23,19 @@ function VerifyUser() {
     if (verification.email === '') {
       setError('An email is required');
       return;
-    }else if (verification.token === '') {
+    } else if (verification.token === '') {
       setError('A code is required');
       return;
     }
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/validate_user`, verification)
       .then((response) => {
         if (response.status === 200) {
-          window.alert(response.data.detail);
-          navigate('/login');
+          if (response.data?.message) {
+            window.alert(response.data.message);
+            navigate('/login');
+          } else if (response.data?.error) {
+            setError(response.data.error);
+          }
         };
       }).catch((error) => {
         if (error.response?.data?.detail) {
