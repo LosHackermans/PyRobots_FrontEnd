@@ -2,6 +2,7 @@ import '../../css/forms.css'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./../../css/robot/UploadRobot.css"
 
 function Upload() {
 
@@ -68,29 +69,45 @@ function Upload() {
     })
   }
 
-  return <div className="mx-3 my-2">
-    <h2>Upload robot</h2>
-    <form className="row justify-content-center" onSubmit={handleSubmit}>
-      <div className="col-10">
-        <div className="mb-4">
-          <label className="form-label">Name: </label>
-          <input className="form-control my-form-control" placeholder="robot_name" onChange={handleInputChange} name="name" type="text" />
-        </div>
-        <div className="mb-4" >
-          <label className="form-label" >Avatar (optional): </label>
-          <input className="form-control my-form-control" type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
-        </div>
-        <div className="mb-4">
-          <label className="form-label" >Robot code: </label>
-          <input className="form-control my-form-control" type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
-        </div>
-        <div className="mt-5">
-          <button className="my-btn" type='submit'>Upload</button>
-          {error && <div className="mb-3"><span >{error}</span></div>}
+  const handleClick = () => {
+    navigate("/robots");
+  }
+
+  return (
+    <>
+      <div className="container">
+        <div className="row justify-content-center pt-5 mt-5 mr-1">
+          <div className="col-md-6 box">
+            <h2 className="text-center" >Upload robot</h2>
+            <hr></hr>
+            <form className="row justify-content-center" onSubmit={handleSubmit}>
+              <div className="col-10">
+                <div className="mb-4">
+                  <label className="form-label">Name: </label>
+                  <input className="form-control my-form-control" placeholder="robot_name" onChange={handleInputChange} name="name" type="text" />
+                </div>
+                <div className="mb-4" >
+                  <label className="form-label" >Avatar (optional): </label>
+                  <input className="form-control my-form-control" type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
+                </div>
+                <div className="mb-4">
+                  <label className="form-label" >Robot code: </label>
+                  <input className="form-control my-form-control" type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
+                </div>
+                <div >
+                  <button className="my-btn" onClick={handleClick} >Go back to robots</button>
+                  <button className="my-btn" type='submit'>Upload</button>
+                </div>
+                {error && <div className='alert-error' align="center"  >
+                  <strong>Error: </strong> {error}
+                </div>}
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </form>
-  </div>
+    </>
+  )
 }
 
 export default Upload;
