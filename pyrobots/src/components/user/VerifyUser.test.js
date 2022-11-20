@@ -11,14 +11,6 @@ jest.mock('react-router-dom', () => ({
 }));
 window.alert = jest.fn();
 
-// const mockRequests = () => {
-//   axios.post.mockImplementation(() => Promise.resolve({ status: 200, data: { message: "User validated" } }));
-// }
-
-// beforeEach(async () => {
-//   mockRequests();
-// })
-
 afterEach(() => {
   cleanup();
 });
