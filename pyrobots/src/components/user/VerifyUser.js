@@ -7,7 +7,8 @@ function VerifyUser() {
 
   const navigate = useNavigate();
   const [verification, setVerification] = useState({
-    code: '',
+    token: '',
+    email: '',
   });
   const [error, setError] = useState('');
 
@@ -44,12 +45,21 @@ function VerifyUser() {
         <div className="col-md-6 box text-center">
           <h2>User verification</h2>
           <hr></hr>
+          <p>Verifying your account will allow you to log in and enjoy all the features of pyRobots.</p>
           <form onSubmit={handleSubmit} >
-            <div>
-              <p>Verifying your account will allow you to log in and enjoy all the features of pyRobots.</p>
-              <label>Enter your verification code: </label>
-              <br />
-              <input type="text" name="code" onChange={handleChange} data-testid="code_input" required ></input>
+            <div className="form-group row">
+              <div className="col-sm-6">
+                <label>Enter your email: </label>
+              </div>
+              <div className="col-sm-6">
+                <input type="email" name="email" onChange={handleChange} data-testid="code_input" required ></input>
+              </div>
+              <div className="col-sm-6">
+                <label>Enter your verification code: </label>
+              </div>
+              <div className="col-sm-6">
+                <input type="text" name="token" onChange={handleChange} data-testid="code_input" required ></input>
+              </div>
             </div>
             <div className="d-grid gap-2 col-3 mx-auto mt-4">
               <button type="submit" className="my-btn" data-testid="validate_button" >Verify user</button>
