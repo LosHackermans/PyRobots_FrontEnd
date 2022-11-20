@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const location = useLocation();
-  if (location.pathname === "/" || location.pathname === "/create_user") return;
+  if (location.pathname === "/" || location.pathname === "/create_user" || location.pathname === "/verify_user") return;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-color">
