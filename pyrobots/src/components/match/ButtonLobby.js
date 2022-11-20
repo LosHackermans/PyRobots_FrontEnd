@@ -3,29 +3,10 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
-const proccessResults = (resutlList) => {
-    if (resutlList.length > 1) {
-        return (
-            <>
-                <div>Empataron</div>
-                {resutlList.map((element) => <><div>{element.user}</div> <div>{element.robot}</div></>)}
-            </>
-        )
-    }
-    else {
-        return (
-            <>
-                <div>Gano</div>
-                {resutlList.map((element) => <><div>{element.user}</div> <div>{element.robot}</div></>)}
-            </>
-        )
-    }
-}
 
 const ButtonLobby = (props) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('');
-    const [result, setResult] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -35,7 +16,7 @@ const ButtonLobby = (props) => {
                 setUser(response.data);
             })
             .catch(function (error) {
-                console.log(error);
+                setError(error);
             });
     }
 
@@ -52,9 +33,6 @@ const ButtonLobby = (props) => {
     const beginMatch = async () => {
         await axios.post(`${process.env.REACT_APP_BACKEND_URL}/start/${id}`)
             .then(function (response) {
-                if (response.data.result) {
-                    setResult(response.data.Result);
-                }
                 if (response.data.detail) {
                     setError(response.data.detail)
                 }
@@ -72,10 +50,6 @@ const ButtonLobby = (props) => {
     if (user.username === props.owner) {
         return (
             <>
-                {
-                    result &&
-                    proccessResults(result)
-                }
                 <button className="my-btn w-auto" onClick={beginMatch}>Iniciar Partida</button>
                 {error && <div>{error}</div>}
             </>

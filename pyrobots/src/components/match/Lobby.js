@@ -1,19 +1,38 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import ButtonLobby from './ButtonLobby';
+import Results from './Results';
 
 const Lobby = () => {
+    const navigate = useNavigate();
     let { id } = useParams();
     const [robots, setRobots] = useState(null);
+    const [results, setResults] = useState(null);
 
     useEffect(() => {
         const ws = new WebSocket("ws://" + process.env.REACT_APP_BACKEND_URL.split("//")[1] + "/lobby/" + id);
         ws.onmessage = function (event) {
-            setRobots(JSON.parse(event.data));
+            if (event.data) {
+                let data = JSON.parse(event.data);
+                if (data.room) {
+                    setRobots(data.room)
+                }
+                if (data.result) {
+                    setResults(data.result);
+                }
+            }
+
         }
     }, [id]);
 
     if (!robots) return;
+
+    let thereIsResults = false;
+    if (!results) {
+        thereIsResults = true;
+    }
+
     return (
         <div className="container">
             <div className="row justify-content-between pt-5 mt-5 mr-1">
@@ -32,7 +51,11 @@ const Lobby = () => {
                     </div>)
                 }
             </div>
-            <ButtonLobby owner={robots.Creator.Owner}/>
+            <Results results={results} />
+            {thereIsResults ? <ButtonLobby owner={robots.Creator.Owner} /> : null}
+            <button type="button" className="my-btn w-auto mx-2" onClick={() => navigate('/matches')} >
+                Go back to matches
+            </button>
         </div>
     )
 }
