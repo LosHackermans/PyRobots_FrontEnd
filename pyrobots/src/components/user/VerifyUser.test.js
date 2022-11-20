@@ -24,10 +24,11 @@ afterEach(() => {
 });
 
 describe("Validate user tests", () => {
-  it("Should show the text-box and the button", async () => {
+  it("Should show the text-boxes and the button", async () => {
     render(<VerifyUser />);
 
     expect(await screen.findByTestId("code_input")).toBeInTheDocument();
+    expect(await screen.findByTestId("email_input")).toBeInTheDocument();
     expect(await screen.findByTestId("validate_button")).toBeInTheDocument();
   });
 
@@ -40,22 +41,35 @@ describe("Validate user tests", () => {
     fireEvent.click(validateButton);
     expect(codeInput).toBeInvalid();
     expect(axios.post).toBeCalledTimes(0);
-    expect(await screen.findByText("A code is required")).toBeInTheDocument();
+  });
+
+  it("Should ask for an input if email is not writen", async () => {
+    render(<VerifyUser />);
+
+    const emailInput = await screen.findByTestId("email_input");
+    const validateButton = await screen.findByTestId("validate_button");
+
+    fireEvent.click(validateButton);
+    expect(emailInput).toBeInvalid();
+    expect(axios.post).toBeCalledTimes(0);
   });
 
   it("Should send a request with the code", async () => {
     render(<VerifyUser />);
 
+    const emailInput = await screen.findByTestId("email_input");
     const codeInput = await screen.findByTestId("code_input");
     const validateButton = await screen.findByTestId("validate_button");
 
+    fireEvent.change(emailInput, {target: {value: 'example@mail.com'}});
     fireEvent.change(codeInput, {target: {value: 'code'}});
     fireEvent.click(validateButton);
     
     expect(codeInput).toBeValid();
     expect(axios.post).toBeCalledTimes(1);
     expect(axios.post).toBeCalledWith(`${process.env.REACT_APP_BACKEND_URL}/validate_user`, {
-      code: 'code'
+      email: 'example@mail.com',
+      token: 'code'
     });
     expect(await window.alert).toBeCalledTimes(1);
     expect(window.alert).toBeCalledWith("User validated");

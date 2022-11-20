@@ -20,7 +20,10 @@ function VerifyUser() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setError('');
-    if (verification.code === '') {
+    if (verification.email === '') {
+      setError('An email is required');
+      return;
+    }else if (verification.token === '') {
       setError('A code is required');
       return;
     }
@@ -52,7 +55,7 @@ function VerifyUser() {
                 <label>Enter your email: </label>
               </div>
               <div className="col-sm-6">
-                <input type="email" name="email" onChange={handleChange} data-testid="code_input" required ></input>
+                <input type="email" name="email" onChange={handleChange} data-testid="email_input" required ></input>
               </div>
               <div className="col-sm-6">
                 <label>Enter your verification code: </label>
