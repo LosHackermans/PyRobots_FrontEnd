@@ -5,10 +5,12 @@ import axios from "axios"
 
 jest.mock('axios');
 const mockedUsedNavigate = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockedUsedNavigate,
 }));
+window.alert = jest.fn();
 
 describe("Tests of create_users", () => {
     test("form fields exist", () => {
@@ -43,9 +45,10 @@ describe("Tests of create_users", () => {
         const button = screen.getByRole('button', { name: /Register/i });
         fireEvent.click(button);
 
-        const response = await screen.findByText('User created successfully');
-
-        expect(response).toBeInTheDocument();
+        expect(await window.alert).toBeCalledTimes(1);
+        expect(window.alert).toBeCalledWith("User created successfully");
+        expect(mockedUsedNavigate).toBeCalledTimes(1);
+        expect(mockedUsedNavigate).toBeCalledWith("/")
     });
 
     test("error in sending data from the user registration form", async () => {

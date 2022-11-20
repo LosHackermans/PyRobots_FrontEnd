@@ -40,7 +40,8 @@ function Create_user() {
       avatar: user.avatar
     }).then(response => {
       if (response.status === 200) {
-        setMessage(response.data.message)
+        window.alert(response.data.message);
+        navigate("/");
       }
     }).catch(error => {
       if (error.response?.data?.detail) {
@@ -63,6 +64,7 @@ function Create_user() {
           <div className="col-md-6 my-form">
             <div className="form-group mt-1 mx-3">
               <h2 className="text-center">Sign Up</h2>
+              <hr></hr>
               <div className="form-group">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
@@ -82,7 +84,7 @@ function Create_user() {
                     <input className='form-control my-form-control' type="file" name="avatar" accept="image/png, image/jpeg" placeholder="robot_avatar" onChange={handleImageChange} />
                   </div>
                   <div className="mx-auto mt-4">
-                    <button className="my-btn" onClick={goLogin} >Go back to Login</button>
+                    <button type="button" className="my-btn" onClick={goLogin} >Go back to Login</button>
                     <button className="my-btn" type='submit'>Register</button>
                   </div>
                   {message ? <p>{message}</p> : null}
