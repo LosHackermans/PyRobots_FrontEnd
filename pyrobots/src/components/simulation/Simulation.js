@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import GameBoard from './GameBoard';
+import ProgressBar from './ProgressBar'
 
 
 
@@ -12,6 +13,7 @@ function Simulation() {
     const [dataRounds, setDataRounds] = useState({});
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
+    const [show, setShow] = useState(false);
 
     const handleRounds = (event) => {
         setRounds(event.target.value);
@@ -42,6 +44,7 @@ function Simulation() {
             rounds: rounds,
         }).then(response => {
             setDataRounds(response.data);
+            setShow(!show);
         }).catch(error => {
             if (error.response?.data?.detail) {
                 setError(error.response.data.detail);
@@ -92,7 +95,10 @@ function Simulation() {
                         <p>{error}</p>
                     </div>
                 </form>
-                <GameBoard data={dataRounds} />
+                <div>
+                    {show ? <ProgressBar data={dataRounds}/> : null}
+                    <GameBoard data={dataRounds} />
+                </div>
             </div>
         </>
     )
