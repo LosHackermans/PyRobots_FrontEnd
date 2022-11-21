@@ -1,4 +1,4 @@
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent, act } from "@testing-library/react";
 import axios from "axios";
 import VerifyUser from "./VerifyUser";
 
@@ -29,8 +29,10 @@ describe("Validate user tests", () => {
 
     const codeInput = await screen.findByTestId("code_input");
     const validateButton = await screen.findByTestId("validate_button");
+    await act(async () => {
+      fireEvent.click(validateButton);
+    });
 
-    fireEvent.click(validateButton);
     expect(codeInput).toBeInvalid();
     expect(axios.post).toBeCalledTimes(0);
   });
@@ -41,7 +43,9 @@ describe("Validate user tests", () => {
     const emailInput = await screen.findByTestId("email_input");
     const validateButton = await screen.findByTestId("validate_button");
 
-    fireEvent.click(validateButton);
+    await act(async () => {
+      fireEvent.click(validateButton);
+    });
     expect(emailInput).toBeInvalid();
     expect(axios.post).toBeCalledTimes(0);
   });
@@ -54,10 +58,13 @@ describe("Validate user tests", () => {
     const codeInput = await screen.findByTestId("code_input");
     const validateButton = await screen.findByTestId("validate_button");
 
-    fireEvent.change(emailInput, {target: {value: 'example@mail.com'}});
-    fireEvent.change(codeInput, {target: {value: 'code'}});
-    fireEvent.click(validateButton);
-    
+    await act(async () => {
+      fireEvent.change(emailInput, { target: { value: 'example@mail.com' } });
+      fireEvent.change(codeInput, { target: { value: 'code' } });
+      fireEvent.click(validateButton);
+    });
+
+
     expect(codeInput).toBeValid();
     expect(axios.post).toBeCalledTimes(1);
     expect(axios.post).toBeCalledWith(`${process.env.REACT_APP_BACKEND_URL}/validate_user`, {
@@ -78,10 +85,11 @@ describe("Validate user tests", () => {
     const codeInput = await screen.findByTestId("code_input");
     const validateButton = await screen.findByTestId("validate_button");
 
-    fireEvent.change(emailInput, {target: {value: 'example@mail.com'}});
-    fireEvent.change(codeInput, {target: {value: 'code'}});
+    await act(async () => {
+      fireEvent.change(emailInput, { target: { value: 'example@mail.com' } });
+    fireEvent.change(codeInput, { target: { value: 'code' } });
     fireEvent.click(validateButton);
-    
+    });
     expect(codeInput).toBeValid();
     expect(axios.post).toBeCalledTimes(1);
     expect(axios.post).toBeCalledWith(`${process.env.REACT_APP_BACKEND_URL}/validate_user`, {
