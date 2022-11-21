@@ -32,7 +32,7 @@ function VerifyUser() {
         if (response.status === 200) {
           if (response.data?.message) {
             window.alert(response.data.message);
-            navigate('/login');
+            navigate('/');
           } else if (response.data?.error) {
             setError(response.data.error);
           }

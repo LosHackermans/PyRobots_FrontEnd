@@ -74,7 +74,7 @@ describe("Validate user tests", () => {
     expect(await window.alert).toBeCalledTimes(1);
     expect(window.alert).toBeCalledWith("User validated");
     expect(mockedUsedNavigate).toBeCalledTimes(1);
-    expect(mockedUsedNavigate).toBeCalledWith("/login");
+    expect(mockedUsedNavigate).toBeCalledWith("/");
   });
 
   it("Should show an error if token is not correct", async () => {
