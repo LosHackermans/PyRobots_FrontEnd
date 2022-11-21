@@ -1,19 +1,20 @@
 import './css/App.css';
 import { RequireToken, setupAxios } from './helpers/Auth'
-import CreateUser from "./components/create_user/create_user";
+import CreateUser from "./components/user/create_user";
 import CreateMatch from './components/match/CreateMatch';
 import Login from './components/login/Login';
 import ListMatches from './components/match/ListMatches';
 import Logout from './components/login/Logout';
 import Upload from './components/robot/upload';
 import Simulation from "./components/simulation/Simulation";
-import Navbar from './components/navbar/navbar';
+import Navbar from "./components/navbar/navbar"
+import ListRobots from './components/robot/ListRobots';
+import VerifyUser from './components/user/VerifyUser';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
-import ListRobots from './components/robot/ListRobots';
 
 function App() {
   setupAxios();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
         <Route path="/robots" element={<RequireToken><ListRobots /></RequireToken>} />
         <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
+        <Route path="/verify_user" element={<VerifyUser />} />
       </Routes>
     </Router>
     </>

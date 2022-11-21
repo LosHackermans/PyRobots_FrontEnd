@@ -95,7 +95,7 @@ function Upload() {
                   <input className="form-control my-form-control" type="file" name="script" placeholder="robot_file" accept=".py" onChange={handleFileChange} />
                 </div>
                 <div >
-                  <button className="my-btn" onClick={handleClick} >Go back to robots</button>
+                  <button className="my-btn" type='button' onClick={handleClick} >Go back to robots</button>
                   <button className="my-btn" type='submit'>Upload</button>
                 </div>
                 {error && <div className='alert-error' align="center"  >
