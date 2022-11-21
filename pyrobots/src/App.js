@@ -32,7 +32,7 @@ function App() {
           <Route path="/upload_robot" element={<RequireToken><Upload /></RequireToken>} />
           <Route path="/robots" element={<RequireToken><ListRobots /></RequireToken>} />
           <Route path="/simulation" element={<RequireToken><Simulation /></RequireToken>} />
-          <Route path="/verify_user" element={<RequireToken><VerifyUser /></RequireToken>} />
+          <Route path="/verify_user" element={<VerifyUser />} />
         </Routes>
     </Router>
   );
