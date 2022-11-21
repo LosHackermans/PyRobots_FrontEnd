@@ -50,7 +50,7 @@ const ButtonLobby = (props) => {
     if (user.username === props.owner) {
         return (
             <>
-                <button className="my-btn w-auto" onClick={beginMatch}>Iniciar Partida</button>
+                <button className="my-btn w-auto" onClick={beginMatch}>Start Match</button>
                 {error && <div>{error}</div>}
             </>
         )
@@ -58,7 +58,7 @@ const ButtonLobby = (props) => {
     else {
         return (
             <>
-                <button className="my-btn w-auto" onClick={leaveMatch}>Abandonar</button>
+                <button className="my-btn w-auto" onClick={leaveMatch}>Leave Match</button>
                 {error && <div>{error}</div>}
             </>
         )

@@ -1,9 +1,11 @@
 const Results = (props) => {
     const results = props.results;
     if (!results) return;
-    return (<div className="my-form mb-2">
-        {(results.length > 1) ? <h1>Empataron</h1> : <div>Gano</div>}
-        {results.map((element) => <div className="row" key={element.User}><p>{element.User} con el robot{element.Robot}</p></div>)}
+    return (<div data-test-id="results" className="my-form mb-2">
+    <h1>
+        {(results.length > 1) ? "Tie" : "Won"}
+    </h1>
+        {results.map((element) => <p key={element.User}>{element.User} with the robot {element.Robot}</p>)}
     </div>)
 }
 

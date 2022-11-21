@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ButtonLobby from './ButtonLobby';
 import Results from './Results';
 
 const Lobby = () => {
-    const navigate = useNavigate();
     let { id } = useParams();
     const [robots, setRobots] = useState(null);
     const [results, setResults] = useState(null);
@@ -45,17 +43,14 @@ const Lobby = () => {
                 {robots.Players.map((element) =>
                     <div className="col-6 mb-3" key={element.Player}>
                         <div className="box">
-                            <h1>{element.Player}</h1>
-                            <h2>{element.Robot_name}</h2>
+                            <h1 data-testid={`player_${element.Player}`}>{element.Player}</h1>
+                            <h2 data-testid={`robot_${element.Robot_name}`}>{element.Robot_name}</h2>
                         </div>
                     </div>)
                 }
             </div>
             <Results results={results} />
             {thereIsResults ? <ButtonLobby owner={robots.Creator.Owner} /> : null}
-            <button type="button" className="my-btn w-auto mx-2" onClick={() => navigate('/matches')} >
-                Go back to matches
-            </button>
         </div>
     )
 }
