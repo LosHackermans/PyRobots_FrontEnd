@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import GameBoard from './GameBoard';
-import ProgressBar from './ProgressBar'
-
-
 
 function Simulation() {
 
@@ -96,7 +93,6 @@ function Simulation() {
                     </div>
                 </form>
                 <div>
-                    {show ? <ProgressBar data={dataRounds}/> : null}
                     <GameBoard data={dataRounds} />
                 </div>
             </div>

@@ -19,31 +19,14 @@ const drawMissiles = (context, missiles) => {
     context.closePath();
 }
 
-let roundNumber = 0;
 let intervalId;
-const drawRound = (context, rounds) => {
-    context.clearRect(0, 0, 1000, 1000);
-    for (let j = 0; j < rounds[roundNumber].robots.length; j++) {
-        
-        rounds[roundNumber].robots[j].life === 0 ? rounds[roundNumber].robots[j].color = "white" : rounds[roundNumber].robots[j].color = colors[j % rounds[roundNumber].robots.length]
-        drawRobots(context, rounds[roundNumber].robots[j]);
-    }
 
-    for (let j = 0; j < rounds[roundNumber].missiles.length; j++) {    
-        rounds[roundNumber].missiles[j].exploded = false
-        rounds[roundNumber].missiles[j].exploded === true? rounds[roundNumber].missiles[j].color = "black" : rounds[roundNumber].missiles[j].color = colors[j % rounds[roundNumber].missiles.length]
-        drawMissiles(context, rounds[roundNumber].missiles[j]);
-    }
-
-    roundNumber++;
-    if (roundNumber === rounds.length) {
-        clearInterval(intervalId);
-    }
-}
 
 function GameBoard(props) {
     const [canvasContext, setCanvasContext] = useState(null);
     const canvasRef = useRef(null);
+    const [isFinished, setIsFinished] = useState(true);
+    let roundNumber = 0;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -56,11 +39,54 @@ function GameBoard(props) {
             roundNumber = 0;
             intervalId = setInterval(drawRound, 100, context, props.data.rounds);
         }
-
     }, [canvasRef, canvasContext, props.data.rounds]);
 
+    const drawRound = (context, rounds) => {
+        setIsFinished(false);
+        context.clearRect(0, 0, 1000, 1000);
+        for (let j = 0; j < rounds[roundNumber].robots.length; j++) {
+
+            rounds[roundNumber].robots[j].life === 0 ? rounds[roundNumber].robots[j].color = "white" : rounds[roundNumber].robots[j].color = colors[j % rounds[roundNumber].robots.length]
+            drawRobots(context, rounds[roundNumber].robots[j]);
+            document.getElementById(rounds[roundNumber].robots[j].id).style.width=rounds[roundNumber].robots[j].life;
+            document.getElementById(rounds[roundNumber].robots[j].id).style.backgroundColor=colors[j % rounds[roundNumber].robots.length];
+        }
+
+        for (let j = 0; j < rounds[roundNumber].missiles.length; j++) {
+            rounds[roundNumber].missiles[j].exploded = false
+            rounds[roundNumber].missiles[j].exploded === true ? rounds[roundNumber].missiles[j].color = "black" : rounds[roundNumber].missiles[j].color = colors[j % rounds[roundNumber].missiles.length]
+            drawMissiles(context, rounds[roundNumber].missiles[j]);
+        }
+
+
+        roundNumber++;
+        if (roundNumber === rounds.length) {
+            clearInterval(intervalId);
+            setIsFinished(true);
+        }
+    }
+
     return (
-        <canvas id="gameBoard" ref={canvasRef} />
+        <>
+            <canvas id="gameBoard" ref={canvasRef} />
+            {!isFinished && (props.data.rounds[0].robots.map((element) =>
+                <div className="my-3" key={element.id}>
+                    <label key={element.id}>{element.id}</label>
+                    <div className="progress my-progress">
+                        <div
+                            id={element.id}
+                            className="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar"
+                            color="red"
+                            aria-label="Animated striped example"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style={{ width: `${element.life}%`, backgroundColor:"black"}}
+                        />
+                    </div>
+                </div>
+            ))}
+        </>
     );
 }
 
