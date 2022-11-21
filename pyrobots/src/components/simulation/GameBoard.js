@@ -3,10 +3,10 @@ import '../../css/Simulation.css';
 
 const colors = ["red", "green", "blue", "yellow"];
 
-const drawRobots = (context, coorX, coorY, color) => {
+const drawRobots = (context, robot) => {
     context.beginPath()
-    context.arc(coorX, coorY, 10, 0, Math.PI * 2);
-    context.fillStyle = color;
+    context.arc(robot.x, robot.y, 10, 0, Math.PI * 2);
+    context.fillStyle = robot.color;
     context.fill();
     context.closePath();
 }
@@ -16,7 +16,9 @@ let intervalId;
 const drawRound = (context, rounds) => {
     context.clearRect(0, 0, 1000, 1000);
     for (let j = 0; j < rounds[roundNumber].robots.length; j++) {
-        drawRobots(context, rounds[roundNumber].robots[j].x, rounds[roundNumber].robots[j].y, colors[j % rounds[roundNumber].robots.length]);
+        
+        rounds[roundNumber].robots[j].life === 0 ? rounds[roundNumber].robots[j].color = "white" : rounds[roundNumber].robots[j].color = colors[j % rounds[roundNumber].robots.length]
+        drawRobots(context, rounds[roundNumber].robots[j]);
     }
     roundNumber++;
     if (roundNumber === rounds.length) {
