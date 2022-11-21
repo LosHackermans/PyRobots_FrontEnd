@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { setToken, fetchToken } from '../../helpers/Auth'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../../css/forms.css';
-
-// to logout: localStorage.removeItem("userToken");
 
 function Login() {
   const navigate = useNavigate();
@@ -14,7 +12,13 @@ function Login() {
     password: ''
   })
 
-  const [error, setErrors] = useState('')
+  const [error, setErrors] = useState('');
+
+  useEffect(() => {
+    if (fetchToken()) {
+      navigate("/matches");
+    }
+  })
 
   const handleInputChange = (event) => {
     setUser({
@@ -53,7 +57,6 @@ function Login() {
         <div className="col-md-4 my-form">
           <div className="form-group mt-1 mx-3">
             <h2 className="text-center">Login</h2>
-            {fetchToken() ? (<p>You are logged in!</p>) : (
               <div className="form-group">
                 <form onSubmit={login}>
                   <div className="mb-3">
@@ -74,7 +77,6 @@ function Login() {
                   {error && <div>{error}</div>}
                 </form>
               </div>
-            )}
           </div>
         </div>
       </div>
