@@ -72,9 +72,16 @@ function ListMatches() {
     navigate(`/lobby/${id}`);
   }
 
+  const goCreateMatch = (id) => {
+    navigate(`/create_match`);
+  }
+
   return (
     <div className="my-form container policy-table mt-3">
-      <div className="row"><button className="my-btn mx-2 w-auto" onClick={() => getMatches()} > Refresh </button></div>
+      <div className="row">
+        <button className="my-btn mx-2 w-auto" onClick={() => getMatches()} > Refresh </button>
+        <button className="my-btn mx-2 w-auto" onClick={() => goCreateMatch()} > Create a match </button>
+      </div>
       <div className="row">
         <ul className="col-6 mt-3 mb-3" data-testid="created_matches">
           <h3>Created matches:</h3>
