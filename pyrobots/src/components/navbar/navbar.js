@@ -1,6 +1,10 @@
 import '../../css/navbar.css';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
+  const location = useLocation();
+  if (location.pathname === "/" || location.pathname === "/create_user" || location.pathname === "/verify_user") return;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-color">
       <div className="container-fluid">
@@ -10,51 +14,21 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/">Home</a>
+              <Link className="nav-link my-link-light" to="/matches">Matches</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/login">Login</a>
+              <Link className="nav-link my-link-light" to="/robots">Robots</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/create_user">Create user</a>
+              <Link className="nav-link my-link-light" to="/simulation">Simulation</Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/matches">Matches</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/create_match">Create match</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/robots">Robots</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/upload_robot">Upload robot</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/simulation">Simulation</a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link my-link-light" href="/logout">Logout</a>
+              <Link className="nav-link my-link-light" to="/logout">Logout</Link>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    // <nav className="navbar navbar-expand-lg navbar-color">
-    //   <div className="container-fluid">
-    //     <div>
-    //       <input type="checkbox" id="btn-menu" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" />
-    //       <label for="btn-menu" className="lbl-menu">
-    //         <span id="spn1" />
-    //         <span id="spn2" />
-    //         <span id="spn3" />
-    //       </label>
-    //     </div>
-    //     <div className="collapse navbar-collapse" id="menu">
-    //      
-    //     </div>
-    //   </div>
-    // </nav>
   );
 }
 
