@@ -44,9 +44,7 @@ function CreateMatch() {
       .post(`${process.env.REACT_APP_BACKEND_URL}/create_match`, match)
       .then(function (response) {
         if (response.data.match_id) {
-          // make somthing with id_match
-          console.log(response.data.match_id);
-          navigate("/matches"); //Todo: navigate to match's lobby
+          navigate(`/lobby/${response.data.match_id}`);
         } else if (response.data.error) {
           setErrors(response.data.error);
         }

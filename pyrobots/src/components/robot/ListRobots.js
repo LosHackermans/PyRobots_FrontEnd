@@ -42,9 +42,9 @@ function ListRobots() {
                       <h5>{element.name}</h5>
                     </div>
                     <div className="col-md-4 col-sm-4" >
-                      <a>Won matches: {element.games_won} </a> <br />
-                      <a>Tied matches: {element.games_draw} </a> <br />
-                      <a>Played matches: {element.games_played} </a>
+                      <div>Won matches: {element.games_won} </div>
+                      <div>Tied matches: {element.games_draw} </div>
+                      <div>Played matches: {element.games_played} </div>
                     </div>
                   </div>
                   <hr></hr>

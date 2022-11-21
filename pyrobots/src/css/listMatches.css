@@ -20,7 +20,7 @@
 }
 
 .policy {
-  border-radius: 2em;
+  border-radius: 0.5em;
   background-color: white;
   margin-bottom: 15px;
   -moz-box-shadow: 0 0 3px #30aaca;
@@ -42,9 +42,6 @@ li {
 }
 
 #select-robot {
-  --bs-gutter-x: 60rem;
-  --bs-gutter-y: 0;
-  width: 100%;
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   margin-left: auto;
