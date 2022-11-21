@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const ProgressBar = (props) => {
-    let robotsInSimu = props.data.rounds[0].robots.map((robot) => { return robot.id })
-    let robot = props.data.rounds.map((round) => { return(round)}).filter((robot, index) => robot.id === robotsInSimu[index])
+    const { rounds } = props.data
+    let robotsInSimu = rounds[0].robots.map((robot) => { return robot.id })
 
-    console.log(robot)
-
+    console.log(props.data)
     return (
         <>
             {robotsInSimu.map((robotInSimu, index) => {
@@ -13,7 +12,7 @@ const ProgressBar = (props) => {
                     <div className="my-3" key={index}>
                         <label key={robotInSimu}>{robotInSimu}</label>
                         <div className="progress my-progress">
-                            <div className="progress-bar" style={{ width: 20 }}></div>
+                        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100" style={{width: `${50}%`}}></div>
                         </div>
                     </div>
                 )

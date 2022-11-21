@@ -11,6 +11,14 @@ const drawRobots = (context, robot) => {
     context.closePath();
 }
 
+const drawMissiles = (context, missiles) => {
+    context.beginPath()
+    context.arc(missiles.x, missiles.y, 5, 0, Math.PI * 2);
+    context.fillStyle = missiles.color;
+    context.fill();
+    context.closePath();
+}
+
 let roundNumber = 0;
 let intervalId;
 const drawRound = (context, rounds) => {
@@ -20,9 +28,15 @@ const drawRound = (context, rounds) => {
         rounds[roundNumber].robots[j].life === 0 ? rounds[roundNumber].robots[j].color = "white" : rounds[roundNumber].robots[j].color = colors[j % rounds[roundNumber].robots.length]
         drawRobots(context, rounds[roundNumber].robots[j]);
     }
+
+    for (let j = 0; j < rounds[roundNumber].missiles.length; j++) {    
+        rounds[roundNumber].missiles[j].exploded = false
+        rounds[roundNumber].missiles[j].exploded === true? rounds[roundNumber].missiles[j].color = "black" : rounds[roundNumber].missiles[j].color = colors[j % rounds[roundNumber].missiles.length]
+        drawMissiles(context, rounds[roundNumber].missiles[j]);
+    }
+
     roundNumber++;
     if (roundNumber === rounds.length) {
-        console.log('entre');
         clearInterval(intervalId);
     }
 }
