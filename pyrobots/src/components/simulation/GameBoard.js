@@ -3,6 +3,24 @@ import '../../css/Simulation.css';
 
 const colors = ["red", "green", "blue", "yellow"];
 
+const winnersInSimu = (robots) => {
+    let winners = [];
+
+    for (let i = 0; i < robots.length; i++){
+        if(robots[i].life > 0){
+            winners.push(robots[i].id)
+        }
+    }
+
+    if(winners.length === 0){
+        return "Nobody has won!"
+    }else if(winners.length > 1){
+        return alert("the winners are " + winners);
+    }else{
+        return alert("the winners is " + winners);
+    }
+}
+
 const drawRobots = (context, robot) => {
     context.beginPath()
     context.arc(robot.x, robot.y, 10, 0, Math.PI * 2);
@@ -20,13 +38,13 @@ const drawMissiles = (context, missiles) => {
 }
 
 let intervalId;
+let roundNumber = 0;
 
 
 function GameBoard(props) {
     const [canvasContext, setCanvasContext] = useState(null);
     const canvasRef = useRef(null);
     const [isFinished, setIsFinished] = useState(true);
-    let roundNumber = 0;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -48,8 +66,12 @@ function GameBoard(props) {
 
             rounds[roundNumber].robots[j].life === 0 ? rounds[roundNumber].robots[j].color = "white" : rounds[roundNumber].robots[j].color = colors[j % rounds[roundNumber].robots.length]
             drawRobots(context, rounds[roundNumber].robots[j]);
-            document.getElementById(rounds[roundNumber].robots[j].id).style.width=rounds[roundNumber].robots[j].life;
-            document.getElementById(rounds[roundNumber].robots[j].id).style.backgroundColor=colors[j % rounds[roundNumber].robots.length];
+            const robotBar = document.getElementById(rounds[roundNumber].robots[j].id)
+            if(robotBar !== null){
+                robotBar.style.width=rounds[roundNumber].robots[j].life;
+                robotBar.style.backgroundColor=colors[j % rounds[roundNumber].robots.length];
+
+            }
         }
 
         for (let j = 0; j < rounds[roundNumber].missiles.length; j++) {
@@ -62,7 +84,8 @@ function GameBoard(props) {
         roundNumber++;
         if (roundNumber === rounds.length) {
             clearInterval(intervalId);
-            setIsFinished(true);
+            // setIsFinished(true);
+            winnersInSimu(rounds[roundNumber-1].robots);
         }
     }
 
