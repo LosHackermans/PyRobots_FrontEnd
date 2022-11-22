@@ -94,7 +94,7 @@ function GameBoard(props) {
         roundNumber++;
         if (roundNumber === rounds.length) {
             clearInterval(intervalId);
-            // setIsFinished(true);
+            setIsFinished(true);
             winnersInSimu(rounds[roundNumber-1].robots);
         }
     }
