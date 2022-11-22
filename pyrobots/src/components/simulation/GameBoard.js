@@ -75,8 +75,18 @@ function GameBoard(props) {
         }
 
         for (let j = 0; j < rounds[roundNumber].missiles.length; j++) {
-            rounds[roundNumber].missiles[j].exploded = false
-            rounds[roundNumber].missiles[j].exploded === true ? rounds[roundNumber].missiles[j].color = "black" : rounds[roundNumber].missiles[j].color = colors[j % rounds[roundNumber].missiles.length]
+            let shooter = rounds[roundNumber].missiles[j].shooter;
+
+            if(rounds[roundNumber].missiles[j].exploded === true){
+                rounds[roundNumber].missiles[j].color = "black";
+            }
+            
+            for (let index = 0; index < rounds[roundNumber].robots.length; index++) {
+                if (rounds[roundNumber].robots[index].id === shooter){
+                    rounds[roundNumber].missiles[j].color = rounds[roundNumber].robots[index].color
+                }
+            }
+
             drawMissiles(context, rounds[roundNumber].missiles[j]);
         }
 
