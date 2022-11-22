@@ -41,7 +41,7 @@ function Create_user() {
     }).then(response => {
       if (response.status === 200) {
         window.alert(response.data.message);
-        navigate("/");
+        navigate("/verify_user");
       }
     }).catch(error => {
       if (error.response?.data?.detail) {

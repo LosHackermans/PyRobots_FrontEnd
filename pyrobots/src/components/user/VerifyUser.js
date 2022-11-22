@@ -53,6 +53,7 @@ function VerifyUser() {
           <h2>User verification</h2>
           <hr></hr>
           <p>Verifying your account will allow you to log in and enjoy all the features of pyRobots.</p>
+          <p>Check your mail!</p>
           <form onSubmit={handleSubmit} >
             <div className="form-group row">
               <div className="col-sm-6">

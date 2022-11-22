@@ -91,8 +91,6 @@ describe("List robots tests", () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
     for (let i = 0; i < robotsTest.robots.length; i++) {
       const { findByText } = within(screen.getByTestId(`robot_${robotsTest.robots[i].name}`));
-      expect(await findByText(`Won matches:`)).toBeInTheDocument();
-      expect(await findByText(`Tied matches:`)).toBeInTheDocument();
       expect(await findByText(`Played matches:`)).toBeInTheDocument();
     }
   });

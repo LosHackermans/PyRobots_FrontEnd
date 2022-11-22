@@ -48,7 +48,7 @@ describe("Tests of create_users", () => {
         expect(await window.alert).toBeCalledTimes(1);
         expect(window.alert).toBeCalledWith("User created successfully");
         expect(mockedUsedNavigate).toBeCalledTimes(1);
-        expect(mockedUsedNavigate).toBeCalledWith("/")
+        expect(mockedUsedNavigate).toBeCalledWith("/verify_user")
     });
 
     test("error in sending data from the user registration form", async () => {

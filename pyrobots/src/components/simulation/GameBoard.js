@@ -68,7 +68,7 @@ function GameBoard(props) {
             drawRobots(context, rounds[roundNumber].robots[j]);
             const robotBar = document.getElementById(rounds[roundNumber].robots[j].id)
             if(robotBar !== null){
-                robotBar.style.width=rounds[roundNumber].robots[j].life;
+                robotBar.style.width=`${rounds[roundNumber].robots[j].life}%`;
                 robotBar.style.backgroundColor=colors[j % rounds[roundNumber].robots.length];
 
             }
