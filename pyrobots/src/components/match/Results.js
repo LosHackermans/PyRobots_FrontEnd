@@ -5,7 +5,7 @@ const Results = (props) => {
     <h1>
         {(results.length > 1) ? "Tie" : "Won"}
     </h1>
-        {results.map((element) => <p key={element.User}>{element.User} with the robot {element.Robot}</p>)}
+        {results.map((element) => <p key={element.user}>{element.user} with the robot {element.robot}</p>)}
     </div>)
 }
 
