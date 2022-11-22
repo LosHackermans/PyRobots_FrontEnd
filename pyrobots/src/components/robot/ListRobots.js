@@ -42,8 +42,6 @@ function ListRobots() {
                       <h5>{element.name}</h5>
                     </div>
                     <div className="col-md-4 col-sm-4" >
-                      <div>Won matches: {element.games_won} </div>
-                      <div>Tied matches: {element.games_draw} </div>
                       <div>Played matches: {element.games_played} </div>
                     </div>
                   </div>
